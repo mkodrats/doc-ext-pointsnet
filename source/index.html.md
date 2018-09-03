@@ -11,6 +11,8 @@ toc_footers:
 
 includes:
   - graphqlApi
+  - httpRequest
+  
 
 search: true
 ---
