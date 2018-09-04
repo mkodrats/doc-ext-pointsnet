@@ -7,11 +7,12 @@ Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus ber
 
 ### Arguments
 
-Field | Tipe Data | Contoh | Deskripsi
------ | --------- | --------- | -------
-transaction_id | String | 355675f5-1232-455a-88be-88317534a639 | ID Transaksi
-points_usage | Int | 1234 |Banyak Poin yang digunakan
 
+Field | Tipe Data | Contoh | Wajib | Deskripsi
+----- | --------- | ------ | ----- | ---------
+transaction_id | String | 355675f5-1232-455a-88be-88317534a639 | Y | ID Transaksi
+points_usage | Int | 1234 | Y | Banyak Poin yang digunakan
+promo_code | String | DUMY123 | T | Kode Promosi   
 
 Hasil dari request diatas akan berisi informasi berikut:
 
