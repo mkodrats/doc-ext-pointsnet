@@ -4,23 +4,22 @@ Graphql API
 
 ## Pay
 Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
-<table>
-  <tr>
-    <th>Field</th>
-    <th>Type Data</th>
-    <th>Deskripsi</th>
-  </tr>
-  <tr>
-    <td>transaction_id</td>
-    <td>String</td>
-    <td>ID Transaksi</td>
-  </tr>
-  <tr>
-    <td>points_usage</td>
-    <td>Int</td>
-    <td>Banyak Poin yang digunakan</td>
-  </tr>
-</table>
+
+Field | Type Data | Deskripsi
+----- | --------- | ---------
+transaction_id | String | ID Transaksi
+points_usage | Int | Banyak Poin yang digunakan
+
+
+Hasil dari request diatas akan berisi informasi berikut:
+
+Field | Type Data | Deskripsi
+----- | --------- | ---------
+token | String | ID Transaksi
+cash_usage | Int | Banyak uang tunai yang digunakan
+currency_code | Int | Kode mata uang
+currency_rate | Int | Nilai tukar mata uang
+converted_cash_usage | Int | Penggunaan uang tunai yang dikonversi
 
 ```scheme
   pay (
