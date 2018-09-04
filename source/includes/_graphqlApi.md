@@ -3,7 +3,24 @@
 Graphql API
 
 ## Pay
-Hello this is graphql APi pay
+Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
+<table>
+  <tr>
+    <th>Field</th>
+    <th>Type Data</th>
+    <th>Deskripsi</th>
+  </tr>
+  <tr>
+    <td>transaction_id</td>
+    <td>String</td>
+    <td>ID Transaksi</td>
+  </tr>
+  <tr>
+    <td>points_usage</td>
+    <td>Int</td>
+    <td>Banyak Poin yang digunakan</td>
+  </tr>
+</table>
 
 ```scheme
   pay (
