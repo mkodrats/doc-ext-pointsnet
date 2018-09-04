@@ -3,6 +3,31 @@
 Graphql API
 
 ## Pay
+
+```scheme
+  pay (
+    transaction_id: "355675f5-1232-455a-88be-88317534a639",
+    points_usage: 1234,
+    promo_code: "DUMY123",
+  ) {
+    token
+    cash_usage
+    currency_code
+    currency_rate
+    converted_cash_usage
+  }
+```
+
+```json
+  { 
+    "cash_usage": "0",
+    "converted_cash_usage": "0",
+    "currency_code": "HKD",
+    "currency_rate": "1",
+    "token": "183aea61-b7d0-45f3-a109-f46508cc01ef" 
+  }
+```
+
 Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
 
 ### Arguments
@@ -26,28 +51,7 @@ currency_code | String | HKD | Kode mata uang
 currency_rate | String | 1 | Nilai tukar mata uang
 converted_cash_usage | String | 0 | Penggunaan uang tunai yang dikonversi
 
-```scheme
-  pay (
-    transaction_id: $id,
-    points_usage: $pointsUsage,
-  ) {
-    token
-    cash_usage
-    currency_code
-    currency_rate
-    converted_cash_usage
-  }
-```
 
-```json
- {
-    token
-    cash_usage
-    currency_code
-    currency_rate
-    converted_cash_usage
-  }
-```
 
 ## Confirm
 
