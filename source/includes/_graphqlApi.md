@@ -35,9 +35,9 @@ Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus ber
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ----- | --------- | ------ | ----- | ---------
-transaction_id | String | 355675f5-1232-455a-88be-88317534a639 | Y | ID Transaksi
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
 points_usage | Int | 1234 | Y | Banyak Poin yang digunakan
-promo_code | String | DUMY123 | T | Kode Promosi   
+promo_code | String | "DUMY123" | T | Kode Promosi   
 
 Hasil dari request diatas akan berisi informasi berikut:
 
@@ -45,11 +45,11 @@ Hasil dari request diatas akan berisi informasi berikut:
 
 Field | Tipe Data | Contoh    | Deskripsi
 ----- | --------- | --------- | -------
-token | String    | 183aea61-b7d0-45f3-a109-f46508cc01ef | ID Transaksi
-cash_usage | String | 0 | Banyak uang tunai yang digunakan
-currency_code | String | HKD | Kode mata uang
-currency_rate | String | 1 | Nilai tukar mata uang
-converted_cash_usage | String | 0 | Penggunaan uang tunai yang dikonversi
+token | String    | "183aea61-b7d0-45f3-a109-f46508cc01ef" | ID Transaksi
+cash_usage | String | "0" | Banyak uang tunai yang digunakan
+currency_code | String | "HKD" | Kode mata uang
+currency_rate | String | "1" | Nilai tukar mata uang
+converted_cash_usage | String | "0" | Penggunaan uang tunai yang dikonversi
 
 
 
