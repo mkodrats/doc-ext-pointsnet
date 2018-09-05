@@ -2,6 +2,101 @@
 
 Graphql API
 
+## Mendapatkan detail programme
+```scheme
+  programme_detail(
+    id: "355675f5-1232-455a-88be-88317534a639"
+  ) {
+    id
+    name
+    logo
+    bank_id
+    card_number_format
+    is_bank
+    is_credit_card
+    description
+    theme_id
+    personnel
+    lms_id
+    lms_name
+    bank_name
+    issuer_point
+    issuer_currency_code
+    issuer_currency_exchange
+    point_discount_rate_percentage
+    min_redeem_percentage
+    facilitation_fee
+    point_cancel_fee
+    currency_cancel_fee
+    is_active
+    loyalty_code
+  }
+```
+
+```json
+  {
+    "id": "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
+    "name": "BCA BAGI BAGI",
+    "logo": "https://your-site.com/logo.png",
+    "bank_id": "244f9582-b00c-11e8-96f8-529269fb1459",
+    "card_number_format": "XXXX XXXX XXXX XXXX",
+    "is_bank": false,
+    "is_credit_card": false,
+    "description": "<p>Bank BCA bagi bagi promo point</p>",
+    "theme_id": "729033a7-2ddb-4df6-bf89-8495b6337d7a",
+    "personnel": "Bank",
+    "lms_id": "5e6d71fc-b026-11e8-96f8-529269fb1459",
+    "lms_name": "LMS",
+    "bank_name": "BCA",
+    "issuer_point": "10",
+    "issuer_currency_code": "USD",
+    "issuer_currency_exchange": "10",
+    "point_discount_rate_percentage": "20",
+    "min_redeem_percentage": "30",
+    "facilitation_fee": "10",
+    "point_cancel_fee": "10",
+    "currency_cancel_fee": "10",
+    "is_active": true,
+    "loyalty_code": "asdfg"
+  }
+```
+
+Query ini berfungsi untuk mendapatkan detail dari program yang dipilih
+
+### Arguments
+
+Field | Tipe Data | Contoh | Wajib | Deskripsi
+------|-----------|--------|-------|----------
+id | String | "355675f5-1232-455a-88be-88317534a639" | Y | Ini adalah ID Program yang akan dikirim untuk mendapatkan detail programnya
+
+### Fields
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | Ini adalah ID dari detail program yang dipilih
+name | String | "BCA BAGI BAGI" | Ini adalah nama program dari detail program yang dipilih
+logo | String | "https://your-site.com/logo.png" | Ini adalah url image logo dari program yang dipilih
+bank_id | String | "244f9582-b00c-11e8-96f8-529269fb1459" | Ini adalah ID bank yang mengadakan program ini
+card_number_format | String | "XXXX XXXX XXXX XXXX" | Ini adalah format dari nomor kartu yang diizinkan
+is_bank | Boolean | false | Ini adalah status dari program apakah yang mengadakan bank atau bukan
+is_credit_card | Boolean | false | Status ini hanya boleh dimiliki oleh bank. jika is_bank bernilai true, maka field ini boleh bernilai true/false. sedangkan jika is_bank bernilai false, maka field ini otomatis bernilai false
+description | String | "<p>Bank BCA bagi bagi promo point</p>" | Ini adalah deskripsi atau penjelasan dari program yang dipilih
+theme_id | String | "729033a7-2ddb-4df6-bf89-8495b6337d7a" | Ini adalah ID Tema yang akan digunakan setelah melakukan pemilihan program
+personnel | String | "Bank" | Ini adalah kategori dari penyedia program. misal BCA yang memiliki program maka nilainya adalah bank
+lms_id | String | "5e6d71fc-b026-11e8-96f8-529269fb1459" | Ini adalah ID dari LMS
+lms_name | String | "LSM" | Ini adalah nama dari LMS
+bank_name | String | "BCA" | Ini adalah nama dari Bank
+issuer_point | String | "10" | Ini adalah point dari penerbit
+issuer_currency_code | String | "USD" | Ini adalah kode mata uang penerbit
+issuer_currency_exchange | String | "10" | Ini adalah nilai tukar mata uang penerbit
+point_discount_rate_percentage | String | "20" | Ini adalah nilai presentase point diskon
+min_redeem_percentage | String | "30" | Ini adalah presentase minimal untuk menebus
+facilitation_fee | String | "10" | Ini adalah biaya administrasi
+point_cancel_fee | String | "10" | Ini adalah biaya membatalkan point
+currency_cancel_fee | String | "10" | Ini adalah biaya pembatalan
+is_active | Boolean | true | Ini adalah status dari detail program, apakah aktif atau tidak
+loyalty_code | String | "asdfg" | Ini adalah kode loyalty
+
 ## Pay
 
 Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
