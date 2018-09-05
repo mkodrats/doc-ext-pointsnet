@@ -208,25 +208,25 @@ confirm (
 ```json
 {
 
- “balance”: 120000,
+ "balance": 120000,
 
- “min_redeem”: 1659,
+ "min_redeem": 1659,
 
- “max_redeem”: 19522,
+ "max_redeem": 19522,
 
- “max_slider_points”: 19540,
+ "max_slider_points": 19540,
 
- “fee”: “7”,
+ "fee": "7",
 
- “point_step”: 1234,
+ "point_step": 1234,
 
- “point_value”: 0.0051219512195122,
+ "point_value": 0.0051219512195122,
 
- “promo_points”: 0,
+ "promo_points": 0,
 
- “promo_points_value”: 0,
+ "promo_points_value": 0,
 
-  “message”: “ ”
+  "message": " "
 
 }
 ```
@@ -469,3 +469,66 @@ card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kar
 is_bank | Boolean | false | Status *merchant* ( bank atau non bank). is_bank bernilai true apabila program ditawarkan dari *merchant* bank dan is_bank bernilai false apabila program ditawarkan dari *merchant* non bank.
 description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
 
+## Mendapatkan ID Transaksi
+
+### Penjelasan
+
+Query ini digunakan untuk mendapatkan ID Transaksi
+
+```scheme
+  create (
+    transaction: {
+      order_id: "123",
+      total_amount: 0.14,
+      currency: "MYR"
+    },
+    items: [{
+      name: "foo",
+      category: "bar",
+      price: 250.0,
+      quantity: 1,
+    }],
+    customer: {
+      first_name: "baz",
+      last_name: "ban",
+      email: "foo.bar@baz.ban",
+      phone: "+1234",
+    },
+    expiry: {
+      start_time: "2006-01-02T15:04:05+07:00",
+      unit: "minute",
+      duration: 5,
+    }
+    ) {
+    transaction_id
+        }
+  }
+```
+
+```json
+  { 
+      "transaction_id": "355675f5-1232-455a-88be-88317534a639"
+  }
+```
+### Arguments
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+transaction  | [Obyek Transaction](#transaction) | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi transaction.  
+items        | [Obyek Transaction](#items)       | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi items.
+customer     | [Obyek Transaction](#customer)    | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi items.
+expiry       | [Obyek Transaction](#expiry)      | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi items.
+
+### Expiry
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+start_time | String  | "2006-01-02T15:04:05+07:00" | Ini adalah masa berlaku dari ID transaksi
+unit       | String  | "minute" | Ini adalah satuan unit yang digunakan untuk menentukan waktu
+duration   | Integer | 5 | Ini adalah durasi waktu 
+
+### Fields
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | ID Transaksi 
