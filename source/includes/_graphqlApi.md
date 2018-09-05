@@ -2,6 +2,45 @@
 
 Graphql API
 
+## Checkout
+```scheme
+  checkout (
+    transaction_id: "355675f5-1232-455a-88be-88317534a639",
+    programme_id: "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
+    bin: 522664,
+    card_number: 5226644706789205
+  ) {
+    checkout_id
+    redirect_uri
+  }
+```
+
+```json
+  {
+    "checkout_id": "8a009999-e731-4df5-b5b3-c300cb49c75d",
+    "redirect_uri": "https://example.com/redirect-uri"
+  }
+```
+### Penjelasan
+
+Query ini digunakan untuk mengirim data bank identification number atau card number agar dilakukan validasi didalam sistem.
+
+### Arguments
+
+Field | Tipe Data | Contoh | Wajib | Deskripsi
+------|-----------|--------|-------|----------
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
+programme_id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | Y | ID Program yang dipilih
+bin | Integer | 522664 | T | Merupakan Bank Identification Number yang berfungsi untuk mengidentifikasi lembaga penerbit untuk setiap akun pelanggan dan memungkinkan transaksi untuk disalurkan dengan benar.
+card_number | Integer | 5226644706789205 | T | Nomor kartu pengguna
+
+### Fields
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+checkout_id | String | "8a009999-e731-4df5-b5b3-c300cb49c75d" | ID Checkout dipakai untuk melakukan validasi ke AuthMC.
+redirect_uri | String | "https://example.com/redirect-uri" | Alamat uri yang akan di gunakan untuk mengalihkan ke halaman verifikasi jika menggunakan AuthMC.
+
 ## Mendapatkan detail programme
 ```scheme
   programme_detail(
