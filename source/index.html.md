@@ -4,6 +4,8 @@ title: Pointsnet API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - scheme
   - json
+  - shell
+  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
