@@ -146,6 +146,7 @@ currency_rate | String | "1" | Nilai tukar mata uang
 converted_cash_usage | String | "0" | Penggunaan uang tunai yang dikonversi
 
 ## Confirm
+Hello this is graphql APi confirm
 
 ```scheme
 confirm (
@@ -191,8 +192,6 @@ confirm (
 }
 ```
 
-
-
 | Field | Tipe Data | Contoh | Deskripsi |
 | ------ | ----- | --------- | ------------ |
 |transaction_id | String | "536e97e9-0d29-43ec-b8d5-a505d3ee6a8f" | ID Transaksi |
@@ -207,3 +206,171 @@ confirm (
 | promo_points | Integer | 0 | Nilai point jika mengganakan promo kode |
 | promo_points_value | Integer | 0 | Nilai promo point |
 | message | String | "Your transaction was successful" | Pesan tentang transaksi yang berhasil/tidak |
+
+## Mendapatkan Detail Transaksi
+```scheme
+transaction_detail (
+  transaction_id: "86431830-cf39-4f11-a5e5-abbb377b889a"
+) 
+{
+  transaction {
+    order_id,
+    total_amount,
+    currency,
+  },
+  items{
+    name,
+    category,
+    price,
+    quantity,
+  },
+  customer{
+    first_name,
+    last_name,
+    phone,
+    email,
+  },
+  expiry,
+  status,
+  redirect_uri,
+  programme{
+    id,
+    name,
+    logo,
+    card_number_format,
+    is_bank,
+    is_credit_card,
+    description
+  },
+  theme{
+    banner,
+    card_image_front,
+    card_image_back,
+    card_image_logo,
+    background_color_first,
+    background_color_second,
+    angle
+  }
+}
+```
+
+```json
+{ 
+  "transaction" :
+  { 
+    "order_id"      : "ORDER_123",
+    "total_amount"  : 99.98999786376953,
+    "currency"      : "HKD"
+  },
+  "items" :
+  [ 
+    { 
+      "name"      : "foo",
+      "category"  : "bar",
+      "price"     : 99.98999786376953,
+      "quantity"  : 1 
+    } 
+  ],
+  "customer"  :
+  { 
+    "first_name"  : "baz",
+    "last_name"   : "ban",
+    "phone"       : "+6281990880318",
+    "email"       : "rudy@authscure.com.my"
+  },
+  "expiry"        : "2018-09-30 19:24:34 +0700",
+  "status"        : 1,
+  "redirect_uri"  : "http://localhost",
+  "programme" :
+  {
+    "id"                  : "23859836-cf44-6f77-a3e3-abbb455b995a",
+    "name"                : "BCA BAGI BAGI",
+    "logo"                : "https://your_image_logo.com",
+    "card_number_format"  : "XXXX XXXX XXXX XXXX",
+    "is_bank"             : false,
+    "is_credit_card"      : false,
+    "description"         : "Program BCA bagi-bagi"
+  }, 
+  "theme" :
+  {
+    "banner"                  : "https://your_image_banner.com",
+    "card_image_front"        : "https://your_card_image_front.com",
+    "card_image_back"         : "https://your_card_image_back.com",
+    "card_image_logo"         : "https://your_card_image_logo.com",
+    "background_color_first"  : "#FF5737",
+    "background_color_second" : "#FF5733",
+    "angle"                   : 360
+  }
+}
+```
+
+### Penjelasan
+Query ini berfungsi untuk mendapatkan detail transaksi menggunkan parameter ID transaksi.
+
+### Argumen
+Untuk mendpatkan detail transaksi, query harus menyertakan parameter berupa ID transaksi seperti di bawah ini :  
+**transaction_id  : "86431830-cf39-4f11-a5e5-abbb377b889a"**  
+ID tersebut didapatkan ketika menjalankan query create.
+
+Field | Tipe Data | Contoh | Wajib | Deskripsi
+------|-----------|-------|--------|----------
+transaction_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Y | Ini adalah ID transaksi
+
+### Obyek
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+Transaction | [Obyek Transaction](#transaction) | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Ini merupakan data-data transaksi
+items | [Obyek Items](#items) | Klik isi tipe data items untuk melihat field dan contoh obyek ini | Ini merupakan data-data barang yang akan dibeli
+customer | [Obyek Customer](#customer)  | Klik isi tipe data customer untuk melihat field dan contoh obyek ini | Ini merupakan data-data pelanggan yang sedang melakukan transaksi
+expiry | String | "2018-09-30 19:24:34 +0700" | Ini adalah masa berlaku dari ID transaksi
+status | Integer | 1 | Ini adalah status hasil request ID transaksi. 0 = Berhasil, 1 = Tertunda, 2 = Gagal
+redirect_uri | String | "http://localhost" | Ini adalah url yang akan dibuka ketika request transaksi berhasil
+programme | [Obyek Programme](#programme) | Klik isi tipe data programme untuk melihat field dan contoh obyek ini | Ini merupakan data-data program yang dipilih
+theme | [Obyek Theme](#theme) | Klik isi tipe data theme untuk melihat field dan contoh obyek ini | Ini merupakan data-data tema
+
+### Transaction
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+order_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Ini adalah ID order transaksi yang sedang dilakukan
+total_amount | Float | 99.98999786376953 | Ini adalah total harga item yang akan dibeli
+currency | String | "HKD" | Ini adalah jenis mata uang yang digunakan
+[Kembali ke daftar obyek](#obyek)
+### Items
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+name | String | "foo" | Ini adalah nama barang yang akan dibeli
+category | String | "bar" | Ini adalah kategori barang yang akan dibeli
+price | Float | 99.98999786376953 | Ini adalah harga barang yang akan dibeli
+quantity | Integer | 1 | Ini adalah jumlah barang yang akan dibeli
+[Kembali ke daftar obyek](#obyek)
+### Customer
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+first_name | String | "baz" | Ini adalah nama depan pelanggan yang sedang melakukan transaksi ini
+last_name | String | "ban" | Ini adalah nama belakang pelanggan yang sedang melakukan transaksi ini
+phone | String | "+6281990880318" | Ini adalah nomor telepon pelanggan yang sedang melakukan transaksi ini
+email | String | "rudy@authscure.com.my" | Ini adalah alamat email pelanggan yang sedang melakukan transaksi ini  
+[Kembali ke daftar obyek](#obyek)
+### Programme
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+id | String | "23859836-cf44-6f77-a3e3-abbb455b995a" | Ini adalah ID dari program yang dipilih
+name | String | "BCA BAGI BAGI" | Ini adalah nama dari program yang dipilih
+logo | String | "https://your_image_logo.com" | Ini adalah URL logo dari program yang dipilih
+card_number_format | String | "XXXX XXXX XXXX XXXX" | Ini adalah format nomor kartu kredit dari program yang dipilih
+is_bank | Boolean | false | Jika nilai adalah "true" maka adalah bank, jika nilai adalah "false" maka bukan bank
+is_credit_card | Boolean | false | Jika nilai adalah "true" maka adalah kartu kredit, jika nilai adalah "false" maka bukan kartu kredit
+description | String | "Program BCA bagi-bagi" | Ini adalah deskripsi dari program yang dipilih
+[Kembali ke daftar obyek](#obyek)
+### Theme
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+banner | String | "https://your_image_banner.com" | Ini adalah url gambar banner
+card_image_front | String | "https://your_image_front.com" | Ini adalah url gambar tampak depan kartu kredit
+card_image_back | String | "https://your_image_back.com" | Ini adalah url gambar tampak belakang kartu kredit
+card_image_logo | String | "https://your_image_banner.com" | Ini adalah url gambar logo
+background_color_first | String | "#FF5737" | Ini adalah kode warna latar pertama
+background_color_first | String | "#FF5733" | Ini adalah kode warna latar kedua
+angle | Integer | 360 | Ini adalah nilai derajat dari tata letak tema
+[Kembali ke daftar obyek](#obyek)
