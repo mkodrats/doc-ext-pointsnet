@@ -4,6 +4,8 @@ Graphql API
 
 ## Pay
 
+Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
+
 ```scheme
   pay (
     transaction_id: "355675f5-1232-455a-88be-88317534a639",
@@ -28,15 +30,12 @@ Graphql API
   }
 ```
 
-Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
-
 ### Arguments
-
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ----- | --------- | ------ | ----- | ---------
 transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
-points_usage | Int | 1234 | Y | Banyak Poin yang digunakan
+points_usage | Integer | 1234 | Y | Banyak Poin yang digunakan
 promo_code | String | "DUMY123" | T | Kode Promosi   
 
 Hasil dari request diatas akan berisi informasi berikut:
@@ -50,8 +49,6 @@ cash_usage | String | "0" | Banyak uang tunai yang digunakan
 currency_code | String | "HKD" | Kode mata uang
 currency_rate | String | "1" | Nilai tukar mata uang
 converted_cash_usage | String | "0" | Penggunaan uang tunai yang dikonversi
-
-
 
 ## Confirm
 
