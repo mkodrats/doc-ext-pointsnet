@@ -413,3 +413,59 @@ background_color_first | String | "#FF5737" | Ini adalah kode warna latar pertam
 background_color_first | String | "#FF5733" | Ini adalah kode warna latar kedua
 angle | Integer | 360 | Ini adalah nilai derajat dari tata letak tema
 [Kembali ke daftar obyek](#obyek)
+
+## Daftar Program (Hanya program aktif)
+```scheme
+programme_list (
+        active_only: true
+      ) {
+        id,
+        name,
+        logo,
+        card_number_format,
+        is_bank,
+        description
+      }
+```
+
+```json
+[
+  { 
+    "card_number_format" : "XXXX XXXX XXXX XXXX",
+    "description"        : "Bank BCA bagi bagi promo point",
+    "id"                 : "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
+    "is_bank"            : true,
+    "logo"               : "https://2.bp.blogspot.com/-_BITDWSaNos/WKggIVMUczI/AAAAAAAAB4g/d5-te8J3Ahos89_RQf0UkbTXKOQVQHDRwCPcB/s1600/Logo%2BBank%2BBCA_PNG.png",
+    "name"               : "BCA BAGI BAGI" 
+  },
+  { 
+    "card_number_format" : "XXXX XXXX XXXX XXXX",
+    "description"        : "<p>Dummy programme for admin id</p>",
+    "id"                 : "d2971e38-5236-4656-822c-c6440916c5a8",
+    "is_bank"            : false,
+    "logo"               : "https://media.licdn.com/dms/image/C510BAQGvQkJ994tLwA/company-logo_200_200/0?e=1543449600&v=beta&t=Pc43SWEhxP7fst1WFZbvfoQjC3W7uPJVwDC0801KgWM",
+    "name"               : "Admin Programme" 
+  }
+ ]
+```
+
+### Penjelasan
+Query ini berfungsi untuk menampilkan daftar program yang aktif.
+
+### Argumen
+Field | Tipe Data | Contoh | Wajib | Deskripsi
+------|-----------|--------|-------|----------
+active_only | Boolean | true | Y | Menampilkan daftar program yang aktif. active_only bernilai true apabila program berstatus aktif dan active_only bernilai false apabila program berstatus tidak aktif.
+
+Hasil dari request diatas akan berisi informasi seperti berikut:
+
+### Fields
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+id | String | "d2971e38-5236-4656-822c-c6440916c5a8" | ID dari program yang ditawarkan.
+name | String | "Dummy programme" | Nama dari program yang ditawarkan.
+logo | String | "https://your_image_logo.com" | URL logo dari *merchant* yang menawarkan program.
+card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kartu kredit.
+is_bank | Boolean | false | Status *merchant* ( bank atau non bank). is_bank bernilai true apabila program ditawarkan dari *merchant* bank dan is_bank bernilai false apabila program ditawarkan dari *merchant* non bank.
+description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
+
