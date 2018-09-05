@@ -208,25 +208,25 @@ confirm (
 ```json
 {
 
- “balance”: 120000,
+ "balance": 120000,
 
- “min_redeem”: 1659,
+ "min_redeem": 1659,
 
- “max_redeem”: 19522,
+ "max_redeem": 19522,
 
- “max_slider_points”: 19540,
+ "max_slider_points": 19540,
 
- “fee”: “7”,
+ "fee": "7",
 
- “point_step”: 1234,
+ "point_step": 1234,
 
- “point_value”: 0.0051219512195122,
+ "point_value": 0.0051219512195122,
 
- “promo_points”: 0,
+ "promo_points": 0,
 
- “promo_points_value”: 0,
+ "promo_points_value": 0,
 
-  “message”: “ ”
+  "message": " "
 
 }
 ```
