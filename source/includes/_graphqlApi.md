@@ -47,10 +47,10 @@ Query ini digunakan untuk mendapatkan ID Transaksi
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-transaction  | Transaction | Klik *Transaction* untuk melihat *field* | Objek yang menyimpan informasi transaksi.
-items        | []Items     | Klik *Items* untuk melihat obyek | Objek yang menyimpan informasi *field*.
-customer     | Customer    | Klik *Customer* untuk melihat *field* | Objek yang menyimpan informasi *Customer*.
-expiry       | Expiry      | Klik *Expiry* untuk melihat *field* | Objek yang menyimpan informasi *Expiry*.
+transaction  | [Transaction](#transaction) | Klik *Transaction* untuk melihat *field* | Objek yang menyimpan informasi transaksi.
+items        | [][Items](#items)     | Klik *Items* untuk melihat obyek | Objek yang menyimpan informasi *field*.
+customer     | [Customer](#customer)    | Klik *Customer* untuk melihat *field* | Objek yang menyimpan informasi *Customer*.
+expiry       | [Expiry](#expiry)      | Klik *Expiry* untuk melihat *field* | Objek yang menyimpan informasi *Expiry*.
 
 ### Expiry
 
