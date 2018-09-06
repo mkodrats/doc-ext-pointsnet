@@ -12,8 +12,8 @@ toc_footers:
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - graphqlApi
   - httpRequest
+  - graphqlApi
   
 
 search: true

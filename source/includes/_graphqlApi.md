@@ -1,6 +1,71 @@
 # GraphQL API
 
-Graphql API
+## Mendapatkan ID Transaksi
+
+### Penjelasan
+
+Query ini digunakan untuk mendapatkan ID Transaksi
+
+```scheme
+  create (
+    transaction: {
+      order_id: "123",
+      total_amount: 0.14,
+      currency: "MYR"
+    },
+    items: [
+      {
+        name: "foo",
+        category: "bar",
+        price: 250.0,
+        quantity: 1,
+      }
+    ],
+    customer: {
+      first_name: "baz",
+      last_name: "ban",
+      email: "foo.bar@baz.ban",
+      phone: "+1234",
+    },
+    expiry: {
+      start_time: "2006-01-02T15:04:05+07:00",
+      unit: "minute",
+      duration: 5,
+    }
+  ){
+    transaction_id
+   }
+```
+
+```json
+  { 
+    "transaction_id": "355675f5-1232-455a-88be-88317534a639"
+  }
+```
+
+### Arguments
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+transaction  | [Transaction](#transaction) | Klik *Transaction* untuk melihat field | Objek yang menyimpan informasi transaction.
+items        | [][Items](#items)       | Klik *Items* untuk melihat obyek | Objek yang menyimpan informasi field.
+customer     | [Customer](#customer)    | Klik *Customer* untuk melihat field | Objek yang menyimpan informasi Customer.
+expiry       | [Expiry](#expiry) | Klik *Expiry* untuk melihat field | Objek yang menyimpan informasi Expiry.
+
+### Expiry
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+start_time | String  | "2006-01-02T15:04:05+07:00" | Ini adalah masa berlaku dari ID transaksi
+unit       | String  | "minute" | Ini adalah satuan unit yang digunakan untuk menentukan waktu
+duration   | Integer | 5 | Ini adalah durasi waktu 
+
+### Fields
+
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | ID Transaksi 
+
 
 ## Checkout
 ```scheme
@@ -96,7 +161,7 @@ redirect_uri | String | "https://example.com/redirect-uri" | Alamat uri yang aka
     "point_cancel_fee": "10",
     "currency_cancel_fee": "10",
     "is_active": true,
-    "loyalty_code": "asdfg"
+    "loyalty_code": "MOCK"
   }
 ```
 
@@ -134,7 +199,7 @@ facilitation_fee | String | "10" | Ini adalah biaya administrasi
 point_cancel_fee | String | "10" | Ini adalah biaya membatalkan point
 currency_cancel_fee | String | "10" | Ini adalah biaya pembatalan
 is_active | Boolean | true | Ini adalah status dari detail program, apakah aktif atau tidak
-loyalty_code | String | "asdfg" | Ini adalah kode loyalty
+loyalty_code | String | "MOCK" | Ini adalah kode loyalty
 
 ## Pay
 
@@ -207,27 +272,16 @@ confirm (
 
 ```json
 {
-
  "balance": 120000,
-
  "min_redeem": 1659,
-
  "max_redeem": 19522,
-
  "max_slider_points": 19540,
-
  "fee": "7",
-
  "point_step": 1234,
-
  "point_value": 0.0051219512195122,
-
  "promo_points": 0,
-
  "promo_points_value": 0,
-
-  "message": " "
-
+ "message": ""
 }
 ```
 
@@ -317,9 +371,6 @@ transaction_detail (
     "phone"       : "+6281990880318",
     "email"       : "rudy@authscure.com.my"
   },
-  "expiry"        : "2018-09-30 19:24:34 +0700",
-  "status"        : 1,
-  "redirect_uri"  : "http://localhost",
   "programme" :
   {
     "id"                  : "23859836-cf44-6f77-a3e3-abbb455b995a",
@@ -339,7 +390,10 @@ transaction_detail (
     "background_color_first"  : "#FF5737",
     "background_color_second" : "#FF5733",
     "angle"                   : 360
-  }
+  },
+  "expiry"        : "2018-09-30 19:24:34 +0700",
+  "status"        : 1,
+  "redirect_uri"  : "http://localhost",
 }
 ```
 
@@ -347,9 +401,7 @@ transaction_detail (
 Query ini berfungsi untuk mendapatkan detail transaksi menggunkan parameter ID transaksi.
 
 ### Argumen
-Untuk mendpatkan detail transaksi, query harus menyertakan parameter berupa ID transaksi seperti di bawah ini :  
-**transaction_id  : "86431830-cf39-4f11-a5e5-abbb377b889a"**  
-ID tersebut didapatkan ketika menjalankan query create.
+Untuk mendapatkan detail transaksi, query harus menyertakan parameter berupa ID transaksi seperti di bawah ini :  
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|-------|--------|----------
@@ -359,14 +411,14 @@ transaction_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Y | Ini adala
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-Transaction | [Obyek Transaction](#transaction) | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Ini merupakan data-data transaksi
-items | [Obyek Items](#items) | Klik isi tipe data items untuk melihat field dan contoh obyek ini | Ini merupakan data-data barang yang akan dibeli
-customer | [Obyek Customer](#customer)  | Klik isi tipe data customer untuk melihat field dan contoh obyek ini | Ini merupakan data-data pelanggan yang sedang melakukan transaksi
-expiry | String | "2018-09-30 19:24:34 +0700" | Ini adalah masa berlaku dari ID transaksi
+Transaction | [Transaction](#transaction) | Klik *Transaction* untuk melihat field | Ini merupakan informasi data transaksi
+items | [][Items](#items) | Klik *Items* untuk melihat field | Ini merupakan data-data yang yang dibeli oleh pelanggan.
+customer | [Customer](#customer)  | Klik *Customer* untuk melihat field | Ini merupakan informasi data-data pelanggan.
+programme | [Programme](#programme) | Klik *Programme* untuk melihat field | Ini merupakan informasi data-data program yang dipilih
+theme | [Theme](#theme) | Klik *Theme* untuk melihat field | Ini merupakan informasi data-data tema.
+expiry | String | "2018-09-30T19:24:34 +0700" | Ini adalah masa berlaku ID transaksi.
 status | Integer | 1 | Ini adalah status hasil request ID transaksi. 0 = Berhasil, 1 = Tertunda, 2 = Gagal
-redirect_uri | String | "http://localhost" | Ini adalah url yang akan dibuka ketika request transaksi berhasil
-programme | [Obyek Programme](#programme) | Klik isi tipe data programme untuk melihat field dan contoh obyek ini | Ini merupakan data-data program yang dipilih
-theme | [Obyek Theme](#theme) | Klik isi tipe data theme untuk melihat field dan contoh obyek ini | Ini merupakan data-data tema
+redirect_uri | String | "http://localhost" | Ini adalah url yang akan dibuka ketika request transaksi berhasil.
 
 ### Transaction
 Field | Tipe Data | Contoh | Deskripsi
@@ -375,6 +427,7 @@ order_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Ini adalah ID order
 total_amount | Float | 99.98999786376953 | Ini adalah total harga item yang akan dibeli
 currency | String | "HKD" | Ini adalah jenis mata uang yang digunakan
 [Kembali ke daftar obyek](#obyek)
+
 ### Items
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
@@ -383,6 +436,7 @@ category | String | "bar" | Ini adalah kategori barang yang akan dibeli
 price | Float | 99.98999786376953 | Ini adalah harga barang yang akan dibeli
 quantity | Integer | 1 | Ini adalah jumlah barang yang akan dibeli
 [Kembali ke daftar obyek](#obyek)
+
 ### Customer
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
@@ -391,6 +445,7 @@ last_name | String | "ban" | Ini adalah nama belakang pelanggan yang sedang mela
 phone | String | "+6281990880318" | Ini adalah nomor telepon pelanggan yang sedang melakukan transaksi ini
 email | String | "rudy@authscure.com.my" | Ini adalah alamat email pelanggan yang sedang melakukan transaksi ini  
 [Kembali ke daftar obyek](#obyek)
+
 ### Programme
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
@@ -402,6 +457,7 @@ is_bank | Boolean | false | Jika nilai adalah "true" maka adalah bank, jika nila
 is_credit_card | Boolean | false | Jika nilai adalah "true" maka adalah kartu kredit, jika nilai adalah "false" maka bukan kartu kredit
 description | String | "Program BCA bagi-bagi" | Ini adalah deskripsi dari program yang dipilih
 [Kembali ke daftar obyek](#obyek)
+
 ### Theme
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
@@ -416,16 +472,16 @@ angle | Integer | 360 | Ini adalah nilai derajat dari tata letak tema
 
 ## Daftar Program (Hanya program aktif)
 ```scheme
-programme_list (
-        active_only: true
-      ) {
-        id,
-        name,
-        logo,
-        card_number_format,
-        is_bank,
-        description
-      }
+  programme_list (
+    active_only: true
+  ) {
+    id,
+    name,
+    logo,
+    card_number_format,
+    is_bank,
+    description
+  }
 ```
 
 ```json
@@ -468,67 +524,3 @@ logo | String | "https://your_image_logo.com" | URL logo dari *merchant* yang me
 card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kartu kredit.
 is_bank | Boolean | false | Status *merchant* ( bank atau non bank). is_bank bernilai true apabila program ditawarkan dari *merchant* bank dan is_bank bernilai false apabila program ditawarkan dari *merchant* non bank.
 description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
-
-## Mendapatkan ID Transaksi
-
-### Penjelasan
-
-Query ini digunakan untuk mendapatkan ID Transaksi
-
-```scheme
-  create (
-    transaction: {
-      order_id: "123",
-      total_amount: 0.14,
-      currency: "MYR"
-    },
-    items: [{
-      name: "foo",
-      category: "bar",
-      price: 250.0,
-      quantity: 1,
-    }],
-    customer: {
-      first_name: "baz",
-      last_name: "ban",
-      email: "foo.bar@baz.ban",
-      phone: "+1234",
-    },
-    expiry: {
-      start_time: "2006-01-02T15:04:05+07:00",
-      unit: "minute",
-      duration: 5,
-    }
-    ) {
-    transaction_id
-        }
-  }
-```
-
-```json
-  { 
-      "transaction_id": "355675f5-1232-455a-88be-88317534a639"
-  }
-```
-### Arguments
-
-Field | Tipe Data | Contoh | Deskripsi
-------|-----------|--------|----------
-transaction  | [Obyek Transaction](#transaction) | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi transaction.  
-items        | [Obyek Transaction](#items)       | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi items.
-customer     | [Obyek Transaction](#customer)    | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi items.
-expiry       | [Obyek Transaction](#expiry)      | Klik tipe data transaction untuk melihat field dan contoh obyek ini | Objek yang menyimpan informasi items.
-
-### Expiry
-
-Field | Tipe Data | Contoh | Deskripsi
-------|-----------|--------|----------
-start_time | String  | "2006-01-02T15:04:05+07:00" | Ini adalah masa berlaku dari ID transaksi
-unit       | String  | "minute" | Ini adalah satuan unit yang digunakan untuk menentukan waktu
-duration   | Integer | 5 | Ini adalah durasi waktu 
-
-### Fields
-
-Field | Tipe Data | Contoh | Deskripsi
-------|-----------|--------|----------
-transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | ID Transaksi 
