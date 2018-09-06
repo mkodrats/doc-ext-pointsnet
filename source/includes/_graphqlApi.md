@@ -18,10 +18,10 @@
       }
     ],
     customer: {
-      first_name: "Jack",
-      last_name: "Sparrow",
-      email: "jack@gmail.com",
-      phone: "+123 XXX XXX XXX",
+      first_name: "baz",
+      last_name: "ban",
+      email: "email@example.com",
+      phone: "+6282 XXX XXX XXX",
     },
     expiry: {
       start_time: "2006-01-02T15:04:05+07:00",
@@ -47,24 +47,24 @@ Query ini digunakan untuk mendapatkan ID Transaksi
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-transaction  | [Transaction](#transaction) | Klik *Transaction* untuk melihat field | Objek yang menyimpan informasi transaction.
-items        | [][Items](#items)       | Klik *Items* untuk melihat obyek | Objek yang menyimpan informasi field.
-customer     | [Customer](#customer)    | Klik *Customer* untuk melihat field | Objek yang menyimpan informasi Customer.
-expiry       | [Expiry](#expiry) | Klik *Expiry* untuk melihat field | Objek yang menyimpan informasi Expiry.
+transaction  | Transaction | Klik *Transaction* untuk melihat *field* | Objek yang menyimpan informasi transaksi.
+items        | []Items     | Klik *Items* untuk melihat obyek | Objek yang menyimpan informasi *field*.
+customer     | Customer    | Klik *Customer* untuk melihat *field* | Objek yang menyimpan informasi *Customer*.
+expiry       | Expiry      | Klik *Expiry* untuk melihat *field* | Objek yang menyimpan informasi *Expiry*.
 
 ### Expiry
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-start_time | String  | "2006-01-02T15:04:05+07:00" | Ini adalah masa berlaku dari ID transaksi
-unit       | String  | "minute" | Ini adalah satuan unit yang digunakan untuk menentukan waktu
-duration   | Integer | 5 | Ini adalah durasi waktu 
+start_time | String  | "2006-01-02T15:04:05+07:00" | Masa berlaku dari ID transaksi
+unit       | String  | "minute" | Satuan unit yang digunakan untuk menentukan waktu
+duration   | Integer | 5 | Durasi waktu 
 
 ### Fields
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | ID Transaksi 
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | ID Transaksi menggunakan format UUID
 
 
 ## Daftar program (Hanya program aktif)
@@ -109,19 +109,24 @@ Query ini berfungsi untuk menampilkan daftar program yang aktif.
 ### Arguments
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|--------|-------|----------
-active_only | Boolean | true | Y | Menampilkan daftar program yang aktif. active_only bernilai true apabila program berstatus aktif dan active_only bernilai false apabila program berstatus tidak aktif.
+active_only | Boolean | true | Y | `active_only` bernilai `true` akan menampilkan semua program yang berstatus aktif dan `active_only` bernilai `false` akan menampilkan semua program termasuk yang tidak aktif.
 
-Hasil dari request diatas akan berisi informasi seperti berikut:
+Hasil dari *request* diatas akan berisi informasi seperti berikut:
 
 ### Fields
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-id | String | "d2971e38-5236-4656-822c-c6440916c5a8" | ID dari program yang ditawarkan.
+id | String | "d2971e38-5236-4656-822c-c6440916c5a8" | ID dari program yang ditawarkan dan menggunakan format UUID.
 name | String | "Dummy programme" | Nama dari program yang ditawarkan.
 logo | String | "https://your_image_logo.com" | URL logo dari *merchant* yang menawarkan program.
 card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kartu kredit.
-is_bank | Boolean | false | Status *merchant* ( bank atau non bank). is_bank bernilai true apabila program ditawarkan dari *merchant* bank dan is_bank bernilai false apabila program ditawarkan dari *merchant* non bank.
-description | String | "<p>Dummy programme for admin id</p>" | Deskripsi dari program yang ditawarkan.
+is_bank | Boolean | false | Status *merchant* ( bank atau non bank). `is_bank` bernilai `true` apabila program ditawarkan dari *merchant* bank dan is_bank bernilai `false` apabila program ditawarkan dari *merchant* non bank.
+description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
+
+
+
+
+
 
 ## Rincian program
 
@@ -183,41 +188,41 @@ description | String | "<p>Dummy programme for admin id</p>" | Deskripsi dari pr
   }
 ```
 ### Penjelasan
-Query ini berfungsi untuk mendapatkan detail dari program yang dipilih
+Query ini berfungsi untuk mendapatkan rincian dari program yang dipilih
 
 ### Arguments
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|--------|-------|----------
-id | String | "355675f5-1232-455a-88be-88317534a639" | Y | Ini adalah ID Program yang akan dikirim untuk mendapatkan detail programnya
+id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Program yang akan dikirim untuk mendapatkan rincian programnya dan menggunakan format UUID
 
 ### Fields
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | Ini adalah ID dari detail program yang dipilih
-name | String | "BCA BAGI BAGI" | Ini adalah nama program dari detail program yang dipilih
-logo | String | "https://your-site.com/logo.png" | Ini adalah url image logo dari program yang dipilih
-bank_id | String | "244f9582-b00c-11e8-96f8-529269fb1459" | Ini adalah ID bank yang mengadakan program ini
-card_number_format | String | "XXXX XXXX XXXX XXXX" | Ini adalah format dari nomor kartu yang diizinkan
-is_bank | Boolean | false | Ini adalah status dari program apakah yang mengadakan bank atau bukan
-is_credit_card | Boolean | false | Status ini hanya boleh dimiliki oleh bank. jika is_bank bernilai true, maka field ini boleh bernilai true/false. sedangkan jika is_bank bernilai false, maka field ini otomatis bernilai false
-description | String | "<p>Bank BCA bagi bagi promo point</p>" | Ini adalah deskripsi atau penjelasan dari program yang dipilih
-theme_id | String | "729033a7-2ddb-4df6-bf89-8495b6337d7a" | Ini adalah ID Tema yang akan digunakan setelah melakukan pemilihan program
-personnel | String | "Bank" | Ini adalah kategori dari penyedia program. misal BCA yang memiliki program maka nilainya adalah bank
-lms_id | String | "5e6d71fc-b026-11e8-96f8-529269fb1459" | Ini adalah ID dari LMS
-lms_name | String | "LSM" | Ini adalah nama dari LMS
-bank_name | String | "BCA" | Ini adalah nama dari Bank
-issuer_point | String | "10" | Ini adalah point dari penerbit
-issuer_currency_code | String | "USD" | Ini adalah kode mata uang penerbit
-issuer_currency_exchange | String | "10" | Ini adalah nilai tukar mata uang penerbit
-point_discount_rate_percentage | String | "20" | Ini adalah nilai presentase point diskon
-min_redeem_percentage | String | "30" | Ini adalah presentase minimal untuk menebus
-facilitation_fee | String | "10" | Ini adalah biaya administrasi
-point_cancel_fee | String | "10" | Ini adalah biaya membatalkan point
-currency_cancel_fee | String | "10" | Ini adalah biaya pembatalan
-is_active | Boolean | true | Ini adalah status dari detail program, apakah aktif atau tidak
-loyalty_code | String | "MOCK" | Ini adalah kode loyalty
+id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | ID dari program yang dipilih dan menggunakan format UUID
+name | String | "BCA BAGI BAGI" | Nama dari rincian program yang dipilih
+logo | String | "https://your-site.com/logo.png" | *Url image* logo dari program yang dipilih
+bank_id | String | "244f9582-b00c-11e8-96f8-529269fb1459" | ID bank yang bekerja sama dengan program dan menggunakan format UUID
+card_number_format | String | "XXXX XXXX XXXX XXXX" | Format dari nomor kartu yang diizinkan
+is_bank | Boolean | false | Status dari program apakah yang mengadakan bank atau bukan
+is_credit_card | Boolean | false | Status ini hanya dapat dimiliki oleh bank. Jika `is_bank` bernilai `true`, maka *field* ini boleh bernilai `true`/`false`. Jika `is_bank` bernilai `false`, maka *field* ini otomatis bernilai `false`
+description | String | "<p>Bank BCA bagi bagi promo point</p>" | Deskripsi atau penjelasan dari program yang dipilih
+theme_id | String | "729033a7-2ddb-4df6-bf89-8495b6337d7a" | ID Tema program, yang akan digunakan untuk keperluan pengambilan tema program
+personnel | String | "Bank" | Kategori dari penyedia program. Misal BCA yang memiliki program maka nilainya adalah Bank
+lms_id | String | "5e6d71fc-b026-11e8-96f8-529269fb1459" | ID LMS menggunakan format UUID
+lms_name | String | "LMS" | Nama LMS
+bank_name | String | "BCA" | Nama Bank
+issuer_point | String | "10" | Point penerbit
+issuer_currency_code | String | "USD" | Kode mata uang penerbit
+issuer_currency_exchange | String | "10" | Nilai tukar mata uang penerbit
+point_discount_rate_percentage | String | "20" | Nilai presentase *point* diskon
+min_redeem_percentage | String | "30" | Persentase minimal untuk menebus
+facilitation_fee | String | "10" | Biaya administrasi
+point_cancel_fee | String | "10" | Biaya pembatalan transaksi
+currency_cancel_fee | String | "10" | Biaya pembatalan transaksi dalam satuan uang
+is_active | Boolean | true | Status dari rincian program, apakah aktif atau tidak
+loyalty_code | String | "MOCK" | Kode *loyalty*
 
 ## Proses pembayaran
 ```scheme
@@ -241,22 +246,22 @@ loyalty_code | String | "MOCK" | Ini adalah kode loyalty
 
 ### Penjelasan
 
-Query ini digunakan untuk mengirim data bank identification number atau card number agar dilakukan validasi didalam sistem untuk melanjutkan pembayaran.
+Query ini digunakan untuk mengirim data bank *identification number* atau *card number* agar dilakukan validasi didalam sistem untuk melanjutkan pembayaran.
 
 ### Arguments
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|--------|-------|----------
-transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
-programme_id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | Y | ID Program yang dipilih
-bin | Integer | 522664 | T | Merupakan Bank Identification Number yang berfungsi untuk mengidentifikasi lembaga penerbit untuk setiap akun pelanggan dan memungkinkan transaksi untuk disalurkan dengan benar.
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi menggunakan format UUID
+programme_id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | Y | ID Program yang dipilih dan menggunakan format UUID
+bin | Integer | 522664 | T | *Bank Identification Number* yang berfungsi untuk mengidentifikasi lembaga penerbit untuk setiap akun pelanggan dan memungkinkan transaksi untuk disalurkan dengan benar.
 card_number | Integer | 5226644706789205 | T | Nomor kartu pengguna
 
 ### Fields
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-checkout_id | String | "8a009999-e731-4df5-b5b3-c300cb49c75d" | ID Checkout dipakai untuk melakukan validasi ke AuthMC.
+checkout_id | String | "8a009999-e731-4df5-b5b3-c300cb49c75d" | ID *Checkout* dipakai untuk melakukan validasi ke AuthMC dan menggunakan format UUID.
 redirect_uri | String | "https://example.com/redirect-uri" | Alamat uri yang akan di gunakan untuk mengalihkan ke halaman verifikasi jika menggunakan AuthMC.
 
 
@@ -266,7 +271,7 @@ redirect_uri | String | "https://example.com/redirect-uri" | Alamat uri yang aka
 ```scheme
 confirm (
   transaction_id: "536e97e9-0d29-43ec-b8d5-a505d3ee6a8f",
-  promo_code: "POINSNET123"
+  promo_code: "APRILASYIK"
 ) {
   balance 
   min_redeem
@@ -297,7 +302,7 @@ confirm (
 ```
 
 ### Penjelasan
-Query ini di gunakan untuk melakukan konfirmasi data sebelum melakukan melakukan pembayaran. dimana dengan menjalankan query ini anda akan mendapatkan informasi berupa data seperti pada tabel field.
+Query ini di gunakan untuk melakukan konfirmasi data sebelum melakukan melakukan pembayaran. dimana dengan menjalankan query ini anda akan mendapatkan informasi berupa data seperti pada tabel *field*.
 
 ### Arguments
 Untuk mendapatkan informasi data, query harus menyertakan parameter berupa ID transaksi atau kode promo seperti di bawah ini :  
@@ -305,21 +310,21 @@ Untuk mendapatkan informasi data, query harus menyertakan parameter berupa ID tr
 
  Field | Tipe Data | Contoh | Wajib | Deskripsi |
 | ------ | ----- | --------- | ------- | ------------ |
-|transaction_id | String | "536e97e9-0d29-43ec-b8d5-a505d3ee6a8f" | Y |ID Transaksi |
-|promo_code | String | "POINSNET123" | T | Kode promo |
+|transaction_id | String | "536e97e9-0d29-43ec-b8d5-a505d3ee6a8f" | Y | ID Transaksi menggunakan format UUID |
+|promo_code | String | "APRILASYIK" | T | Kode promo |
 
 ### Fields
 
 | Field | Tipe Data | Contoh | Deskripsi |
 | ------ | ----- | --------- | ------------ |
 | balance | Integer | 120000 | Saldo pelanggan |
-| min_redeem | Integer | 1659 | Minimal penggunaan point |
-| max_redeem | Integer | 19522 | Maksimal penggunaan point |
-| max_slider_points | Integer | 19540 | Maksimal point berdasarkan banyaknya point pelanggan atau hasil konversi dari total biaya ke point |
+| min_redeem | Integer | 1659 | Minimal penggunaan *point* |
+| max_redeem | Integer | 19522 | Maksimal penggunaan *point* |
+| max_slider_points | Integer | 19540 | Maksimal *point* berdasarkan banyaknya *point* pelanggan atau hasil konversi dari total biaya ke *point* |
 | fee | String | "7" | Biaya administrasi |
 | point_step| Integer | 1234 | Nilai dari setiap step |
-| point_value | Float | 0.0051219512195122 | Nilai per point |
-| promo_points | Integer | 0 | Nilai point jika mengganakan promo kode |
+| point_value | Float | 0.0051219512195122 | Nilai per *point* |
+| promo_points | Integer | 0 | Nilai *point* jika mengganakan promo kode |
 | promo_points_value | Integer | 0 | Nilai promo point |
 | message | String | "Your transaction was successful" | Pesan tentang transaksi yang berhasil/tidak |
 
@@ -329,7 +334,7 @@ Untuk mendapatkan informasi data, query harus menyertakan parameter berupa ID tr
   pay (
     transaction_id: "355675f5-1232-455a-88be-88317534a639",
     points_usage: 1234,
-    promo_code: "DUMY123",
+    promo_code: "HEMAT100",
   ) {
     token
     cash_usage
@@ -343,22 +348,22 @@ Untuk mendapatkan informasi data, query harus menyertakan parameter berupa ID tr
   { 
     "cash_usage": "0",
     "converted_cash_usage": "0",
-    "currency_code": "HKD",
+    "currency_code": "MYR",
     "currency_rate": "1",
     "token": "183aea61-b7d0-45f3-a109-f46508cc01ef" 
   }
 ```
 ### Penjalasan
 
-Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
+Query ini digunakan untuk melakukan transaksi pembayaran. *Request* anda harus berisi informasi berikut:
 
 ### Arguments
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ----- | --------- | ------ | ----- | ---------
-transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi menggunakan format UUID
 points_usage | Integer | 1234 | Y | Banyak Poin yang digunakan
-promo_code | String | "DUMY123" | T | Kode Promosi   
+promo_code | String | "HEMAT100" | T | Kode Promosi   
 
 Hasil dari request diatas akan berisi informasi berikut:
 
@@ -366,9 +371,9 @@ Hasil dari request diatas akan berisi informasi berikut:
 
 Field | Tipe Data | Contoh    | Deskripsi
 ----- | --------- | --------- | -------
-token | String    | "183aea61-b7d0-45f3-a109-f46508cc01ef" | ID Transaksi
+token | String    | "183aea61-b7d0-45f3-a109-f46508cc01ef" | ID Transaksi menggunakan format UUID
 cash_usage | String | "0" | Banyak uang tunai yang digunakan
-currency_code | String | "HKD" | Kode mata uang
+currency_code | String | "MYR" | Kode mata uang
 currency_rate | String | "1" | Nilai tukar mata uang
 converted_cash_usage | String | "0" | Penggunaan uang tunai yang dikonversi
 
@@ -424,8 +429,8 @@ transaction_detail (
   "transaction" :
   { 
     "order_id"      : "ORDER_123",
-    "total_amount"  : 99.98999786376953,
-    "currency"      : "HKD"
+    "total_amount"  : 99.98,
+    "currency"      : "MYR"
   },
   "items" :
   [ 
@@ -438,10 +443,10 @@ transaction_detail (
   ],
   "customer"  :
   { 
-    "first_name"  : "Jack",
-    "last_name"   : "Sparrow",
-    "phone"       : "+6281 XXX XXX XXX",
-    "email"       : "customer@gmail.com"
+    "first_name"  : "baz",
+    "last_name"   : "ban",
+    "phone"       : "+6282 XXX XXX XXX",
+    "email"       : "email@example.com"
   },
   "programme" :
   {
@@ -470,117 +475,69 @@ transaction_detail (
 ```
 
 ### Penjelasan
-Query ini berfungsi untuk mendapatkan detail transaksi menggunkan parameter ID transaksi.
+Query ini berfungsi untuk mendapatkan rincian transaksi menggunkan parameter ID transaksi.
 
 ### Arguments
-Untuk mendapatkan detail transaksi, query harus menyertakan parameter berupa ID transaksi seperti di bawah ini :  
+Untuk mendapatkan rincian transaksi, query harus menyertakan parameter berupa ID transaksi seperti di bawah ini :  
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|-------|--------|----------
-transaction_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Y | Ini adalah ID transaksi
+transaction_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Y | ID transaksi menggunakan format UUID
 
 ### Fields
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-Transaction | [Transaction](#transaction) | Klik *Transaction* untuk melihat field | Ini merupakan informasi data transaksi
-items | [][Items](#items) | Klik *Items* untuk melihat field | Ini merupakan data-data yang yang dibeli oleh pelanggan.
-customer | [Customer](#customer)  | Klik *Customer* untuk melihat field | Ini merupakan informasi data-data pelanggan.
-programme | [Programme](#programme) | Klik *Programme* untuk melihat field | Ini merupakan informasi data-data program yang dipilih
-theme | [Theme](#theme) | Klik *Theme* untuk melihat field | Ini merupakan informasi data-data tema.
-expiry | String | "2018-09-30T19:24:34 +0700" | Ini adalah masa berlaku ID transaksi.
-status | Integer | 1 | Ini adalah status hasil request ID transaksi. 0 = Berhasil, 1 = Tertunda, 2 = Gagal
-redirect_uri | String | "http://example.com" | Ini adalah url yang akan dibuka ketika proses transaksi berhasil.
+Transaction | Transaction | Klik *Transaction* untuk melihat *field* | Informasi transaksi
+items | []Items | Klik *Items* untuk melihat *field* | Data pembelian oleh pelanggan.
+customer | Customer  | Klik *Customer* untuk melihat *field* | Informasi data pelanggan.
+programme | Programme | Klik *Programme* untuk melihat *field* | Informasi data program yang dipilih
+theme | Theme | Klik *Theme* untuk melihat *field* | Informasi data tema.
+expiry | String | "2018-09-30T19:24:34 +0700" | Masa berlaku ID transaksi.
+status | Integer | 1 | Status hasil *request* ID transaksi. 0 = Berhasil, 1 = Tertunda, 2 = Gagal
+redirect_uri | String | "http://localhost" | Url yang akan dibuka ketika *request* transaksi berhasil.
 
 ### Transaction
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-order_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Ini adalah ID order transaksi yang sedang dilakukan
-total_amount | Float | 99.98 | Ini adalah total harga item yang akan dibeli
-currency | String | "HKD" | Ini adalah jenis mata uang yang digunakan
+order_id | String | "1253236" | ID Order dari transaksi
+total_amount | Float | 99.98 | Total harga item yang akan dibeli
+currency | String | "MYR" | Jenis mata uang yang digunakan
 
 ### Items
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-name | String | "foo" | Ini adalah nama barang yang akan dibeli
-category | String | "bar" | Ini adalah kategori barang yang akan dibeli
-price | Float | 99.98 | Ini adalah harga barang yang akan dibeli
-quantity | Integer | 1 | Ini adalah jumlah barang yang akan dibeli
+name | String | "foo" | Nama barang yang dibeli
+category | String | "bar" | Kategori barang yang dibeli
+price | Float | 99.98 | Harga barang yang dibeli
+quantity | Integer | 1 | Jumlah barang yang dibeli
 
 ### Customer
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-first_name | String | "Jack" | Ini adalah nama depan pelanggan yang sedang melakukan transaksi ini
-last_name | String | "Sparrow" | Ini adalah nama belakang pelanggan yang sedang melakukan transaksi ini
-phone | String | "+6281 XXX XXX XXX" | Ini adalah nomor telepon pelanggan yang sedang melakukan transaksi ini
-email | String | "jack@gmail.com" | Ini adalah alamat email pelanggan yang sedang melakukan transaksi ini  
+first_name | String | "baz" | Nama depan pelanggan yang sedang melakukan transaksi
+last_name | String | "ban" | Nama belakang pelanggan yang sedang melakukan transaksi
+phone | String | "+6282 XXX XXX XXX" | Nomor telepon pelanggan yang sedang melakukan transaksi
+email | String | "email@example.com" | Alamat email pelanggan yang sedang melakukan transaksi
 
 ### Programme
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-id | String | "23859836-cf44-6f77-a3e3-abbb455b995a" | Ini adalah ID dari program yang dipilih
-name | String | "BCA BAGI BAGI" | Ini adalah nama dari program yang dipilih
-logo | String | "https://your_image_logo.com" | Ini adalah URL logo dari program yang dipilih
-card_number_format | String | "XXXX XXXX XXXX XXXX" | Ini adalah format nomor kartu kredit dari program yang dipilih
-is_bank | Boolean | false | Jika nilai adalah "true" maka adalah bank, jika nilai adalah "false" maka bukan bank
-is_credit_card | Boolean | false | Jika nilai adalah "true" maka adalah kartu kredit, jika nilai adalah "false" maka bukan kartu kredit
-description | String | "Program BCA bagi-bagi" | Ini adalah deskripsi dari program yang dipilih
+id | String | "23859836-cf44-6f77-a3e3-abbb455b995a" | ID program yang dipilih dan menggunakan format UUID
+name | String | "BCA BAGI BAGI" | Nama program yang dipilih
+logo | String | "https://example.com/your_image_logo.png" | URL logo dari program yang dipilih
+card_number_format | String | "XXXX XXXX XXXX XXXX" | Format nomor kartu kredit dari program yang dipilih
+is_bank | Boolean | false | Apabila `is_bank` bernilai `true` maka identifikasi untuk bank, jika nilai adalah `false` maka identifikasi selain bank
+is_credit_card | Boolean | false | Jika nilai adalah `true` maka identifikasi untuk kartu kredit, jika nilai adalah `false` maka identifikasi selain kartu kredit
+description | String | "Program BCA bagi-bagi" | Deskripsi program yang dipilih
 
 ### Theme
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-banner | String | "https://your_image_banner.com" | Ini adalah url gambar banner
-card_image_front | String | "https://your_image_front.com" | Ini adalah url gambar tampak depan kartu kredit
-card_image_back | String | "https://your_image_back.com" | Ini adalah url gambar tampak belakang kartu kredit
-card_image_logo | String | "https://your_image_banner.com" | Ini adalah url gambar logo
-background_color_first | String | "#FF5737" | Ini adalah kode warna latar pertama
-background_color_first | String | "#FF5733" | Ini adalah kode warna latar kedua
-angle | Integer | 360 | Ini adalah nilai derajat dari tata letak tema
-
-
-## Detail Theme
-```scheme
-theme_detail (
-        id: "f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
-        programme_id: "123e4567-e89b-12d3-a456-426655440000"
-      ) {
-        banner,
-        card_image_front,
-        card_image_back,
-        card_image_logo,
-        background_color_first,
-        background_color_second,
-        angle,
-      }
-```
-```json
-{  
-   "banner": "https://example.com/banner.jpg", 
-   "card_image_front":"http://example.com/image_front.jpg",
-   "card_image_back":"http://example.com/image_back.jpg",
-   "card_image_logo":"http://example.com/image_logo.jpg",
-   "background_color_first":"#3ca6ed",
-   "background_color_second":"#593030",
-   "angle":180 
-}
-```
-
-### Pejelasan
-Query ini berfungsi untuk mengambil data detail tema berdasar kan Id tema atau Id program.
-
-### Arguments
-Field | Tipe Data | Contoh | Wajib | Deskripsi
-------|-----------|--------|-------|-----------
-Id | String | "f81d4fae-7dec-11d0-a765-00a0c91e6bf6" | T | Id tema
-programme_id | String | "123e4567-e89b-12d3-a456-426655440000" | T | Id program
-
-### Fields
-Field | Tipe Data | Contoh | Deskripsi
-------|-----------|--------|----------
-banner | String | "https://example.com/banner.jpg" | Url gambar banner
-card_image_front | String | "http://example.com/image_front.jpg" | Url gambar depan
-card_image_back | String | "http://example.com/image_back.jpg" | Url gambar belakang
-card_image_logo | String | "http://example.com/image_logo.jpg" |Url gambar logo
-background_color_first | String |"#3ca6ed" | Background warna utama
-background_color_second | String | "#593030" | Background warna kedua
-angle | Interger | 180 | Tata letak derajat gradasi desain
+banner | String | "https://example.com/your_image_banner.png" | Url gambar banner
+card_image_front | String | "https://example.com/your_image_front.png" | Url gambar tampak depan kartu kredit
+card_image_back | String | "https://example.com/your_image_back.png" | Url gambar tampak belakang kartu kredit
+card_image_logo | String | "https://example.com/your_image_logo.png" | Url gambar logo
+background_color_first | String | "#FF5737" | Kode warna latar pertama
+background_color_first | String | "#FF5733" | Kode warna latar kedua
+angle | Integer | 360 | Nilai derajat dari tata letak tema

@@ -7,7 +7,7 @@ Proses komunikasi data pada server Pointsnet dapat dilakukan melalui HTTP(s) Req
 ## HTTP(s) Headers
 
 ### Authorization
-Pada endpoint (`/pointslink`) membutuhkan `Authorization` header dengan syarat dan ketentuan berikut :  
+Pada *endpoint* (`/pointslink`) membutuhkan `Authorization` header dengan syarat dan ketentuan berikut :  
 
 ### Header
 
@@ -25,19 +25,19 @@ Pada endpoint (`/pointslink`) membutuhkan `Authorization` header dengan syarat d
     foo:|8D0C8B7BEDECCCE375021C8E0164039326EFBBF716F4892135DED5EFC9C29999
     a|b
 
-   - `a`: client token key
-   - `b`: generated signature
+   - `a`: *client token key*
+   - `b`: *generated signature*
 
 ### Signature
-Nilai dihitung dari HMAC SHA-256 dengan secret key dan request body.
-Secret key  digabungkan dengan *client token key*. Client token key bisa anda dapatkan setelah mendaftar di Pointsnet.
+Nilai dihitung dari HMAC SHA-256 dengan *secret key* dan *request body*.
+*Secret key*  digabungkan dengan *client token key*. *Client token key* bisa anda dapatkan setelah mendaftar di Pointsnet.
 
 ### Contoh
-Secret key: `foo`
+*Secret key*: `foo`
 
-Request body: `{"query": "query {transaction_detail(transaction_id: \"f64f2940-fae4-11e7-8c5f-ef356f279131\") {transaction {order_id, total_amount}, customer {first_name}} }"}`
+*Request body*: `{"query": "query {transaction_detail(transaction_id: \"f64f2940-fae4-11e7-8c5f-ef356f279131\") {transaction {order_id, total_amount}, customer {first_name}} }"}`
 
-Generated HMAC SHA-256: 
+*Generated* HMAC SHA-256: 
 `8D0C8B7BEDECCCE375021C8E0164039326EFBBF716F4892135DED5EFC9C29999`
 
 Anda dapat mencoba `HMAC Generator Online` [disini](https://www.freeformatter.com/hmac-generator.html)
