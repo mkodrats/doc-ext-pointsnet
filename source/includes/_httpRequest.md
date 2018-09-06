@@ -42,7 +42,6 @@ Nilai dihitung dari HMAC SHA-256 dengan *secret key* dan *request body*.
 
 Anda dapat mencoba `HMAC Generator Online` [disini](https://www.freeformatter.com/hmac-generator.html)
 
-### Contoh
    ```shell
    curl \  
    -X POST \  

@@ -123,11 +123,6 @@ card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kar
 is_bank | Boolean | false | Status *merchant* ( bank atau non bank). `is_bank` bernilai `true` apabila program ditawarkan dari *merchant* bank dan is_bank bernilai `false` apabila program ditawarkan dari *merchant* non bank.
 description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
 
-
-
-
-
-
 ## Rincian program
 
 ```scheme
@@ -208,7 +203,7 @@ card_number_format | String | "XXXX XXXX XXXX XXXX" | Format dari nomor kartu ya
 is_bank | Boolean | false | Status dari program apakah yang mengadakan bank atau bukan
 is_credit_card | Boolean | false | Status ini hanya dapat dimiliki oleh bank. Jika `is_bank` bernilai `true`, maka *field* ini boleh bernilai `true`/`false`. Jika `is_bank` bernilai `false`, maka *field* ini otomatis bernilai `false`
 description | String | "<p>Bank BCA bagi bagi promo point</p>" | Deskripsi atau penjelasan dari program yang dipilih
-theme_id | String | "729033a7-2ddb-4df6-bf89-8495b6337d7a" | ID Tema program, yang akan digunakan untuk keperluan pengambilan tema program
+theme_id | String | "729033a7-2ddb-4df6-bf89-8495b6337d7a" | ID Tema program, yang akan digunakan untuk keperluan pengambilan tema program dan menggunakan format UUID
 personnel | String | "Bank" | Kategori dari penyedia program. Misal BCA yang memiliki program maka nilainya adalah Bank
 lms_id | String | "5e6d71fc-b026-11e8-96f8-529269fb1459" | ID LMS menggunakan format UUID
 lms_name | String | "LMS" | Nama LMS
@@ -568,14 +563,16 @@ theme_detail (
    "angle":180 
 }
 ```
- ### Pejelasan
+### Pejelasan
 Query ini berfungsi untuk mengambil data detail tema berdasar kan Id tema atau Id program.
- ### Arguments
+
+### Arguments
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|--------|-------|-----------
 Id | String | "f81d4fae-7dec-11d0-a765-00a0c91e6bf6" | T | Id tema
 programme_id | String | "123e4567-e89b-12d3-a456-426655440000" | T | Id program
- ### Fields
+
+### Fields
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
 banner | String | "https://example.com/banner.jpg" | Url gambar banner
