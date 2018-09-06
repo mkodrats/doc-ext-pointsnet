@@ -488,11 +488,11 @@ transaction_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Y | ID transa
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-Transaction | Transaction | Klik *Transaction* untuk melihat *field* | Informasi transaksi
-items | []Items | Klik *Items* untuk melihat *field* | Data pembelian oleh pelanggan.
-customer | Customer  | Klik *Customer* untuk melihat *field* | Informasi data pelanggan.
-programme | Programme | Klik *Programme* untuk melihat *field* | Informasi data program yang dipilih
-theme | Theme | Klik *Theme* untuk melihat *field* | Informasi data tema.
+Transaction | [Transaction](#transaction) | Klik *Transaction* untuk melihat *field* | Informasi transaksi
+items | [][Items](#items) | Klik *Items* untuk melihat *field* | Data pembelian oleh pelanggan.
+customer | [Customer](#customer)  | Klik *Customer* untuk melihat *field* | Informasi data pelanggan.
+programme | [Programme](#programme) | Klik *Programme* untuk melihat *field* | Informasi data program yang dipilih
+theme | [Theme](#theme) | Klik *Theme* untuk melihat *field* | Informasi data tema.
 expiry | String | "2018-09-30T19:24:34 +0700" | Masa berlaku ID transaksi.
 status | Integer | 1 | Status hasil *request* ID transaksi. 0 = Berhasil, 1 = Tertunda, 2 = Gagal
 redirect_uri | String | "http://localhost" | Url yang akan dibuka ketika *request* transaksi berhasil.
@@ -540,4 +540,48 @@ card_image_back | String | "https://example.com/your_image_back.png" | Url gamba
 card_image_logo | String | "https://example.com/your_image_logo.png" | Url gambar logo
 background_color_first | String | "#FF5737" | Kode warna latar pertama
 background_color_first | String | "#FF5733" | Kode warna latar kedua
-angle | Integer | 360 | Nilai derajat dari tata letak tema
+angle | Integer | 360 | Tata letak derajat gradasi desain
+
+## Detail Theme
+```scheme
+theme_detail (
+        id: "f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
+        programme_id: "123e4567-e89b-12d3-a456-426655440000"
+      ) {
+        banner,
+        card_image_front,
+        card_image_back,
+        card_image_logo,
+        background_color_first,
+        background_color_second,
+        angle,
+      }
+```
+```json
+{  
+   "banner": "https://example.com/banner.jpg", 
+   "card_image_front":"http://example.com/image_front.jpg",
+   "card_image_back":"http://example.com/image_back.jpg",
+   "card_image_logo":"http://example.com/image_logo.jpg",
+   "background_color_first":"#3ca6ed",
+   "background_color_second":"#593030",
+   "angle":180 
+}
+```
+ ### Pejelasan
+Query ini berfungsi untuk mengambil data detail tema berdasar kan Id tema atau Id program.
+ ### Arguments
+Field | Tipe Data | Contoh | Wajib | Deskripsi
+------|-----------|--------|-------|-----------
+Id | String | "f81d4fae-7dec-11d0-a765-00a0c91e6bf6" | T | Id tema
+programme_id | String | "123e4567-e89b-12d3-a456-426655440000" | T | Id program
+ ### Fields
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+banner | String | "https://example.com/banner.jpg" | Url gambar banner
+card_image_front | String | "http://example.com/image_front.jpg" | Url gambar depan
+card_image_back | String | "http://example.com/image_back.jpg" | Url gambar belakang
+card_image_logo | String | "http://example.com/image_logo.jpg" |Url gambar logo
+background_color_first | String |"#3ca6ed" | Background warna utama
+background_color_second | String | "#593030" | Background warna kedua
+angle | Interger | 180 | Tata letak derajat gradasi desain
