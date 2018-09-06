@@ -432,7 +432,7 @@ transaction_detail (
     { 
       "name"      : "foo",
       "category"  : "bar",
-      "price"     : 99.98999786376953,
+      "price"     : 99.98,
       "quantity"  : 1 
     } 
   ],
@@ -447,7 +447,7 @@ transaction_detail (
   {
     "id"                  : "23859836-cf44-6f77-a3e3-abbb455b995a",
     "name"                : "BCA BAGI BAGI",
-    "logo"                : "https://your_image_logo.com",
+    "logo"                : "https://example.com/logo.com",
     "card_number_format"  : "XXXX XXXX XXXX XXXX",
     "is_bank"             : false,
     "is_credit_card"      : false,
@@ -455,31 +455,31 @@ transaction_detail (
   }, 
   "theme" :
   {
-    "banner"                  : "https://your_image_banner.com",
-    "card_image_front"        : "https://your_card_image_front.com",
-    "card_image_back"         : "https://your_card_image_back.com",
-    "card_image_logo"         : "https://your_card_image_logo.com",
+    "banner"                  : "https://example.com/your_image_banner.png",
+    "card_image_front"        : "https://example.com/your_card_image_front.png",
+    "card_image_back"         : "https://example.com/your_card_image_back.png",
+    "card_image_logo"         : "https://example.com/your_card_image_logo.png",
     "background_color_first"  : "#FF5737",
     "background_color_second" : "#FF5733",
     "angle"                   : 360
   },
   "expiry"        : "2018-09-30 19:24:34 +0700",
   "status"        : 1,
-  "redirect_uri"  : "http://localhost",
+  "redirect_uri"  : "http://example.com",
 }
 ```
 
 ### Penjelasan
 Query ini berfungsi untuk mendapatkan detail transaksi menggunkan parameter ID transaksi.
 
-### Argumen
+### Arguments
 Untuk mendapatkan detail transaksi, query harus menyertakan parameter berupa ID transaksi seperti di bawah ini :  
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|-------|--------|----------
 transaction_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Y | Ini adalah ID transaksi
 
-### Obyek
+### Fields
 
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
@@ -490,7 +490,7 @@ programme | [Programme](#programme) | Klik *Programme* untuk melihat field | Ini
 theme | [Theme](#theme) | Klik *Theme* untuk melihat field | Ini merupakan informasi data-data tema.
 expiry | String | "2018-09-30T19:24:34 +0700" | Ini adalah masa berlaku ID transaksi.
 status | Integer | 1 | Ini adalah status hasil request ID transaksi. 0 = Berhasil, 1 = Tertunda, 2 = Gagal
-redirect_uri | String | "http://localhost" | Ini adalah url yang akan dibuka ketika request transaksi berhasil.
+redirect_uri | String | "http://example.com" | Ini adalah url yang akan dibuka ketika proses transaksi berhasil.
 
 ### Transaction
 Field | Tipe Data | Contoh | Deskripsi
@@ -498,7 +498,6 @@ Field | Tipe Data | Contoh | Deskripsi
 order_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Ini adalah ID order transaksi yang sedang dilakukan
 total_amount | Float | 99.98 | Ini adalah total harga item yang akan dibeli
 currency | String | "HKD" | Ini adalah jenis mata uang yang digunakan
-[Kembali ke daftar obyek](#obyek)
 
 ### Items
 Field | Tipe Data | Contoh | Deskripsi
@@ -507,7 +506,6 @@ name | String | "foo" | Ini adalah nama barang yang akan dibeli
 category | String | "bar" | Ini adalah kategori barang yang akan dibeli
 price | Float | 99.98 | Ini adalah harga barang yang akan dibeli
 quantity | Integer | 1 | Ini adalah jumlah barang yang akan dibeli
-[Kembali ke daftar obyek](#obyek)
 
 ### Customer
 Field | Tipe Data | Contoh | Deskripsi
@@ -516,7 +514,6 @@ first_name | String | "Jack" | Ini adalah nama depan pelanggan yang sedang melak
 last_name | String | "Sparrow" | Ini adalah nama belakang pelanggan yang sedang melakukan transaksi ini
 phone | String | "+6281 XXX XXX XXX" | Ini adalah nomor telepon pelanggan yang sedang melakukan transaksi ini
 email | String | "jack@gmail.com" | Ini adalah alamat email pelanggan yang sedang melakukan transaksi ini  
-[Kembali ke daftar obyek](#obyek)
 
 ### Programme
 Field | Tipe Data | Contoh | Deskripsi
@@ -528,7 +525,6 @@ card_number_format | String | "XXXX XXXX XXXX XXXX" | Ini adalah format nomor ka
 is_bank | Boolean | false | Jika nilai adalah "true" maka adalah bank, jika nilai adalah "false" maka bukan bank
 is_credit_card | Boolean | false | Jika nilai adalah "true" maka adalah kartu kredit, jika nilai adalah "false" maka bukan kartu kredit
 description | String | "Program BCA bagi-bagi" | Ini adalah deskripsi dari program yang dipilih
-[Kembali ke daftar obyek](#obyek)
 
 ### Theme
 Field | Tipe Data | Contoh | Deskripsi
@@ -540,7 +536,6 @@ card_image_logo | String | "https://your_image_banner.com" | Ini adalah url gamb
 background_color_first | String | "#FF5737" | Ini adalah kode warna latar pertama
 background_color_first | String | "#FF5733" | Ini adalah kode warna latar kedua
 angle | Integer | 360 | Ini adalah nilai derajat dari tata letak tema
-[Kembali ke daftar obyek](#obyek)
 
 
 ## Detail Theme
@@ -573,7 +568,7 @@ theme_detail (
 ### Pejelasan
 Query ini berfungsi untuk mengambil data detail tema berdasar kan Id tema atau Id program.
 
-### Argumen
+### Arguments
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|--------|-------|-----------
 Id | String | "f81d4fae-7dec-11d0-a765-00a0c91e6bf6" | T | Id tema
