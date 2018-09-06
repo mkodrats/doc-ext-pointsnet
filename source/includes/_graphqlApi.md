@@ -2,10 +2,6 @@
 
 ## Mendapatkan ID Transaksi
 
-### Penjelasan
-
-Query ini digunakan untuk mendapatkan ID Transaksi
-
 ```scheme
   create (
     transaction: {
@@ -43,6 +39,10 @@ Query ini digunakan untuk mendapatkan ID Transaksi
   }
 ```
 
+### Penjelasan
+
+Query ini digunakan untuk mendapatkan ID Transaksi
+
 ### Arguments
 
 Field | Tipe Data | Contoh | Deskripsi
@@ -67,46 +67,69 @@ Field | Tipe Data | Contoh | Deskripsi
 transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | ID Transaksi 
 
 
-## Checkout
+## Daftar program (Hanya program aktif)
 ```scheme
-  checkout (
-    transaction_id: "355675f5-1232-455a-88be-88317534a639",
-    programme_id: "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
-    bin: 522664,
-    card_number: 5226644706789205
+  programme_list (
+    active_only: true
   ) {
-    checkout_id
-    redirect_uri
+    id,
+    name,
+    logo,
+    card_number_format,
+    is_bank,
+    description
   }
 ```
 
 ```json
-  {
-    "checkout_id": "8a009999-e731-4df5-b5b3-c300cb49c75d",
-    "redirect_uri": "https://example.com/redirect-uri"
+[
+  { 
+    "card_number_format" : "XXXX XXXX XXXX XXXX",
+    "description"        : "Bank BCA bagi bagi promo point",
+    "id"                 : "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
+    "is_bank"            : true,
+    "logo"               : "https://2.bp.blogspot.com/-_BITDWSaNos/WKggIVMUczI/AAAAAAAAB4g/d5-te8J3Ahos89_RQf0UkbTXKOQVQHDRwCPcB/s1600/Logo%2BBank%2BBCA_PNG.png",
+    "name"               : "BCA BAGI BAGI" 
+  },
+  { 
+    "card_number_format" : "XXXX XXXX XXXX XXXX",
+    "description"        : "<p>Dummy programme for admin id</p>",
+    "id"                 : "d2971e38-5236-4656-822c-c6440916c5a8",
+    "is_bank"            : false,
+    "logo"               : "https://media.licdn.com/dms/image/C510BAQGvQkJ994tLwA/company-logo_200_200/0?e=1543449600&v=beta&t=Pc43SWEhxP7fst1WFZbvfoQjC3W7uPJVwDC0801KgWM",
+    "name"               : "Admin Programme" 
   }
+ ]
 ```
+
 ### Penjelasan
 
-Query ini digunakan untuk mengirim data bank identification number atau card number agar dilakukan validasi didalam sistem.
+Query ini berfungsi untuk menampilkan daftar program yang aktif.
 
 ### Arguments
-
 Field | Tipe Data | Contoh | Wajib | Deskripsi
 ------|-----------|--------|-------|----------
-transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
-programme_id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | Y | ID Program yang dipilih
-bin | Integer | 522664 | T | Merupakan Bank Identification Number yang berfungsi untuk mengidentifikasi lembaga penerbit untuk setiap akun pelanggan dan memungkinkan transaksi untuk disalurkan dengan benar.
-card_number | Integer | 5226644706789205 | T | Nomor kartu pengguna
+active_only | Boolean | true | Y | Menampilkan daftar program yang aktif. active_only bernilai true apabila program berstatus aktif dan active_only bernilai false apabila program berstatus tidak aktif.
+
+Hasil dari request diatas akan berisi informasi seperti berikut:
 
 ### Fields
-
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-checkout_id | String | "8a009999-e731-4df5-b5b3-c300cb49c75d" | ID Checkout dipakai untuk melakukan validasi ke AuthMC.
-redirect_uri | String | "https://example.com/redirect-uri" | Alamat uri yang akan di gunakan untuk mengalihkan ke halaman verifikasi jika menggunakan AuthMC.
+id | String | "d2971e38-5236-4656-822c-c6440916c5a8" | ID dari program yang ditawarkan.
+name | String | "Dummy programme" | Nama dari program yang ditawarkan.
+logo | String | "https://your_image_logo.com" | URL logo dari *merchant* yang menawarkan program.
+card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kartu kredit.
+is_bank | Boolean | false | Status *merchant* ( bank atau non bank). is_bank bernilai true apabila program ditawarkan dari *merchant* bank dan is_bank bernilai false apabila program ditawarkan dari *merchant* non bank.
+description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
 
-## Mendapatkan detail programme
+
+
+
+
+
+## Rincian program
+
 ```scheme
   programme_detail(
     id: "355675f5-1232-455a-88be-88317534a639"
@@ -164,7 +187,7 @@ redirect_uri | String | "https://example.com/redirect-uri" | Alamat uri yang aka
     "loyalty_code": "MOCK"
   }
 ```
-
+### Penjelasan
 Query ini berfungsi untuk mendapatkan detail dari program yang dipilih
 
 ### Arguments
@@ -201,56 +224,49 @@ currency_cancel_fee | String | "10" | Ini adalah biaya pembatalan
 is_active | Boolean | true | Ini adalah status dari detail program, apakah aktif atau tidak
 loyalty_code | String | "MOCK" | Ini adalah kode loyalty
 
-## Pay
-
-Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
-
+## Proses pembayaran
 ```scheme
-  pay (
+  checkout (
     transaction_id: "355675f5-1232-455a-88be-88317534a639",
-    points_usage: 1234,
-    promo_code: "DUMY123",
+    programme_id: "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
+    bin: 522664,
+    card_number: 5226644706789205
   ) {
-    token
-    cash_usage
-    currency_code
-    currency_rate
-    converted_cash_usage
+    checkout_id
+    redirect_uri
   }
 ```
 
 ```json
-  { 
-    "cash_usage": "0",
-    "converted_cash_usage": "0",
-    "currency_code": "HKD",
-    "currency_rate": "1",
-    "token": "183aea61-b7d0-45f3-a109-f46508cc01ef" 
+  {
+    "checkout_id": "8a009999-e731-4df5-b5b3-c300cb49c75d",
+    "redirect_uri": "https://example.com/redirect-uri"
   }
 ```
+
+### Penjelasan
+
+Query ini digunakan untuk mengirim data bank identification number atau card number agar dilakukan validasi didalam sistem untuk melanjutkan pembayaran.
 
 ### Arguments
 
 Field | Tipe Data | Contoh | Wajib | Deskripsi
------ | --------- | ------ | ----- | ---------
+------|-----------|--------|-------|----------
 transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
-points_usage | Integer | 1234 | Y | Banyak Poin yang digunakan
-promo_code | String | "DUMY123" | T | Kode Promosi   
-
-Hasil dari request diatas akan berisi informasi berikut:
+programme_id | String | "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea" | Y | ID Program yang dipilih
+bin | Integer | 522664 | T | Merupakan Bank Identification Number yang berfungsi untuk mengidentifikasi lembaga penerbit untuk setiap akun pelanggan dan memungkinkan transaksi untuk disalurkan dengan benar.
+card_number | Integer | 5226644706789205 | T | Nomor kartu pengguna
 
 ### Fields
 
-Field | Tipe Data | Contoh    | Deskripsi
------ | --------- | --------- | -------
-token | String    | "183aea61-b7d0-45f3-a109-f46508cc01ef" | ID Transaksi
-cash_usage | String | "0" | Banyak uang tunai yang digunakan
-currency_code | String | "HKD" | Kode mata uang
-currency_rate | String | "1" | Nilai tukar mata uang
-converted_cash_usage | String | "0" | Penggunaan uang tunai yang dikonversi
+Field | Tipe Data | Contoh | Deskripsi
+------|-----------|--------|----------
+checkout_id | String | "8a009999-e731-4df5-b5b3-c300cb49c75d" | ID Checkout dipakai untuk melakukan validasi ke AuthMC.
+redirect_uri | String | "https://example.com/redirect-uri" | Alamat uri yang akan di gunakan untuk mengalihkan ke halaman verifikasi jika menggunakan AuthMC.
 
-## Confirm
-Hello this is graphql APi confirm
+
+
+## Konfirmasi data
 
 ```scheme
 confirm (
@@ -285,10 +301,22 @@ confirm (
 }
 ```
 
+### Penjelasan
+Query ini di gunakan untuk melakukan konfirmasi data sebelum melakukan melakukan pembayaran. dimana dengan menjalankan query ini anda akan mendapatkan informasi berupa data seperti pada tabel field.
+
+### Arguments
+Untuk mendapatkan informasi data, query harus menyertakan parameter berupa ID transaksi atau kode promo seperti di bawah ini :  
+
+
+ Field | Tipe Data | Contoh | Wajib | Deskripsi |
+| ------ | ----- | --------- | ------- | ------------ |
+|transaction_id | String | "536e97e9-0d29-43ec-b8d5-a505d3ee6a8f" | Y |ID Transaksi |
+|promo_code | String | "POINSNET123" | T | Kode promo |
+
+### Fields
+
 | Field | Tipe Data | Contoh | Deskripsi |
 | ------ | ----- | --------- | ------------ |
-|transaction_id | String | "536e97e9-0d29-43ec-b8d5-a505d3ee6a8f" | ID Transaksi |
-|promo_code | String | "POINSNET123" | Kode promo |
 | balance | Integer | 120000 | Saldo pelanggan |
 | min_redeem | Integer | 1659 | Minimal penggunaan point |
 | max_redeem | Integer | 19522 | Maksimal penggunaan point |
@@ -300,7 +328,56 @@ confirm (
 | promo_points_value | Integer | 0 | Nilai promo point |
 | message | String | "Your transaction was successful" | Pesan tentang transaksi yang berhasil/tidak |
 
-## Mendapatkan Detail Transaksi
+## Membayar
+
+```scheme
+  pay (
+    transaction_id: "355675f5-1232-455a-88be-88317534a639",
+    points_usage: 1234,
+    promo_code: "DUMY123",
+  ) {
+    token
+    cash_usage
+    currency_code
+    currency_rate
+    converted_cash_usage
+  }
+```
+
+```json
+  { 
+    "cash_usage": "0",
+    "converted_cash_usage": "0",
+    "currency_code": "HKD",
+    "currency_rate": "1",
+    "token": "183aea61-b7d0-45f3-a109-f46508cc01ef" 
+  }
+```
+### Penjalasan
+
+Query ini digunakan untuk melakukan transaksi pembayaran. Request anda harus berisi informasi berikut:
+
+### Arguments
+
+Field | Tipe Data | Contoh | Wajib | Deskripsi
+----- | --------- | ------ | ----- | ---------
+transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | Y | ID Transaksi
+points_usage | Integer | 1234 | Y | Banyak Poin yang digunakan
+promo_code | String | "DUMY123" | T | Kode Promosi   
+
+Hasil dari request diatas akan berisi informasi berikut:
+
+### Fields
+
+Field | Tipe Data | Contoh    | Deskripsi
+----- | --------- | --------- | -------
+token | String    | "183aea61-b7d0-45f3-a109-f46508cc01ef" | ID Transaksi
+cash_usage | String | "0" | Banyak uang tunai yang digunakan
+currency_code | String | "HKD" | Kode mata uang
+currency_rate | String | "1" | Nilai tukar mata uang
+converted_cash_usage | String | "0" | Penggunaan uang tunai yang dikonversi
+
+## Rincian transaksi
 ```scheme
 transaction_detail (
   transaction_id: "86431830-cf39-4f11-a5e5-abbb377b889a"
@@ -469,58 +546,3 @@ background_color_first | String | "#FF5737" | Ini adalah kode warna latar pertam
 background_color_first | String | "#FF5733" | Ini adalah kode warna latar kedua
 angle | Integer | 360 | Ini adalah nilai derajat dari tata letak tema
 [Kembali ke daftar obyek](#obyek)
-
-## Daftar Program (Hanya program aktif)
-```scheme
-  programme_list (
-    active_only: true
-  ) {
-    id,
-    name,
-    logo,
-    card_number_format,
-    is_bank,
-    description
-  }
-```
-
-```json
-[
-  { 
-    "card_number_format" : "XXXX XXXX XXXX XXXX",
-    "description"        : "Bank BCA bagi bagi promo point",
-    "id"                 : "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
-    "is_bank"            : true,
-    "logo"               : "https://2.bp.blogspot.com/-_BITDWSaNos/WKggIVMUczI/AAAAAAAAB4g/d5-te8J3Ahos89_RQf0UkbTXKOQVQHDRwCPcB/s1600/Logo%2BBank%2BBCA_PNG.png",
-    "name"               : "BCA BAGI BAGI" 
-  },
-  { 
-    "card_number_format" : "XXXX XXXX XXXX XXXX",
-    "description"        : "<p>Dummy programme for admin id</p>",
-    "id"                 : "d2971e38-5236-4656-822c-c6440916c5a8",
-    "is_bank"            : false,
-    "logo"               : "https://media.licdn.com/dms/image/C510BAQGvQkJ994tLwA/company-logo_200_200/0?e=1543449600&v=beta&t=Pc43SWEhxP7fst1WFZbvfoQjC3W7uPJVwDC0801KgWM",
-    "name"               : "Admin Programme" 
-  }
- ]
-```
-
-### Penjelasan
-Query ini berfungsi untuk menampilkan daftar program yang aktif.
-
-### Argumen
-Field | Tipe Data | Contoh | Wajib | Deskripsi
-------|-----------|--------|-------|----------
-active_only | Boolean | true | Y | Menampilkan daftar program yang aktif. active_only bernilai true apabila program berstatus aktif dan active_only bernilai false apabila program berstatus tidak aktif.
-
-Hasil dari request diatas akan berisi informasi seperti berikut:
-
-### Fields
-Field | Tipe Data | Contoh | Deskripsi
-------|-----------|--------|----------
-id | String | "d2971e38-5236-4656-822c-c6440916c5a8" | ID dari program yang ditawarkan.
-name | String | "Dummy programme" | Nama dari program yang ditawarkan.
-logo | String | "https://your_image_logo.com" | URL logo dari *merchant* yang menawarkan program.
-card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kartu kredit.
-is_bank | Boolean | false | Status *merchant* ( bank atau non bank). is_bank bernilai true apabila program ditawarkan dari *merchant* bank dan is_bank bernilai false apabila program ditawarkan dari *merchant* non bank.
-description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
