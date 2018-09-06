@@ -18,10 +18,10 @@
       }
     ],
     customer: {
-      first_name: "baz",
-      last_name: "ban",
-      email: "foo.bar@baz.ban",
-      phone: "+1234",
+      first_name: "Jack",
+      last_name: "Sparrow",
+      email: "jack@gmail.com",
+      phone: "+123 XXX XXX XXX",
     },
     expiry: {
       start_time: "2006-01-02T15:04:05+07:00",
@@ -85,19 +85,19 @@ transaction_id | String | "355675f5-1232-455a-88be-88317534a639" | ID Transaksi
 [
   { 
     "card_number_format" : "XXXX XXXX XXXX XXXX",
-    "description"        : "Bank BCA bagi bagi promo point",
+    "description"        : "Bagi bagi point kepada pelanggan setia",
     "id"                 : "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
     "is_bank"            : true,
-    "logo"               : "https://2.bp.blogspot.com/-_BITDWSaNos/WKggIVMUczI/AAAAAAAAB4g/d5-te8J3Ahos89_RQf0UkbTXKOQVQHDRwCPcB/s1600/Logo%2BBank%2BBCA_PNG.png",
-    "name"               : "BCA BAGI BAGI" 
+    "logo"               : "https://example.com/logo.png",
+    "name"               : "Pointnet Programme" 
   },
   { 
     "card_number_format" : "XXXX XXXX XXXX XXXX",
     "description"        : "<p>Dummy programme for admin id</p>",
     "id"                 : "d2971e38-5236-4656-822c-c6440916c5a8",
     "is_bank"            : false,
-    "logo"               : "https://media.licdn.com/dms/image/C510BAQGvQkJ994tLwA/company-logo_200_200/0?e=1543449600&v=beta&t=Pc43SWEhxP7fst1WFZbvfoQjC3W7uPJVwDC0801KgWM",
-    "name"               : "Admin Programme" 
+    "logo"               : "https://example.com/logo.png",
+    "name"               : "Dummy programme" 
   }
  ]
 ```
@@ -121,12 +121,7 @@ name | String | "Dummy programme" | Nama dari program yang ditawarkan.
 logo | String | "https://your_image_logo.com" | URL logo dari *merchant* yang menawarkan program.
 card_number_format | String | "XXXX XXXX XXXX XXXX" | Format penulisan nomor kartu kredit.
 is_bank | Boolean | false | Status *merchant* ( bank atau non bank). is_bank bernilai true apabila program ditawarkan dari *merchant* bank dan is_bank bernilai false apabila program ditawarkan dari *merchant* non bank.
-description | String | "Admin Programme" | Deskripsi dari program yang ditawarkan.
-
-
-
-
-
+description | String | "<p>Dummy programme for admin id</p>" | Deskripsi dari program yang ditawarkan.
 
 ## Rincian program
 
@@ -164,7 +159,7 @@ description | String | "Admin Programme" | Deskripsi dari program yang ditawarka
   {
     "id": "a02fd8bb-b6c0-4bbe-bcbb-9045a2b974ea",
     "name": "BCA BAGI BAGI",
-    "logo": "https://your-site.com/logo.png",
+    "logo": "https://example.com/logo.png",
     "bank_id": "244f9582-b00c-11e8-96f8-529269fb1459",
     "card_number_format": "XXXX XXXX XXXX XXXX",
     "is_bank": false,
@@ -443,10 +438,10 @@ transaction_detail (
   ],
   "customer"  :
   { 
-    "first_name"  : "baz",
-    "last_name"   : "ban",
-    "phone"       : "+6281990880318",
-    "email"       : "rudy@authscure.com.my"
+    "first_name"  : "Jack",
+    "last_name"   : "Sparrow",
+    "phone"       : "+6281 XXX XXX XXX",
+    "email"       : "customer@gmail.com"
   },
   "programme" :
   {
@@ -501,7 +496,7 @@ redirect_uri | String | "http://localhost" | Ini adalah url yang akan dibuka ket
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
 order_id | String | "86431830-cf39-4f11-a5e5-abbb377b889a" | Ini adalah ID order transaksi yang sedang dilakukan
-total_amount | Float | 99.98999786376953 | Ini adalah total harga item yang akan dibeli
+total_amount | Float | 99.98 | Ini adalah total harga item yang akan dibeli
 currency | String | "HKD" | Ini adalah jenis mata uang yang digunakan
 [Kembali ke daftar obyek](#obyek)
 
@@ -510,17 +505,17 @@ Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
 name | String | "foo" | Ini adalah nama barang yang akan dibeli
 category | String | "bar" | Ini adalah kategori barang yang akan dibeli
-price | Float | 99.98999786376953 | Ini adalah harga barang yang akan dibeli
+price | Float | 99.98 | Ini adalah harga barang yang akan dibeli
 quantity | Integer | 1 | Ini adalah jumlah barang yang akan dibeli
 [Kembali ke daftar obyek](#obyek)
 
 ### Customer
 Field | Tipe Data | Contoh | Deskripsi
 ------|-----------|--------|----------
-first_name | String | "baz" | Ini adalah nama depan pelanggan yang sedang melakukan transaksi ini
-last_name | String | "ban" | Ini adalah nama belakang pelanggan yang sedang melakukan transaksi ini
-phone | String | "+6281990880318" | Ini adalah nomor telepon pelanggan yang sedang melakukan transaksi ini
-email | String | "rudy@authscure.com.my" | Ini adalah alamat email pelanggan yang sedang melakukan transaksi ini  
+first_name | String | "Jack" | Ini adalah nama depan pelanggan yang sedang melakukan transaksi ini
+last_name | String | "Sparrow" | Ini adalah nama belakang pelanggan yang sedang melakukan transaksi ini
+phone | String | "+6281 XXX XXX XXX" | Ini adalah nomor telepon pelanggan yang sedang melakukan transaksi ini
+email | String | "jack@gmail.com" | Ini adalah alamat email pelanggan yang sedang melakukan transaksi ini  
 [Kembali ke daftar obyek](#obyek)
 
 ### Programme
