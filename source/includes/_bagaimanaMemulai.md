@@ -1,104 +1,35 @@
-# Memulai Menggunakan API
+# Mulai
 
-Pointsnet memiliki dua layanan yang dapat anda gunakan untuk mulai menggunakan Pointsnet yaitu:
+Pointsnet merupakan layanan yang menggabungkan `point` dari loyalty yang berkerja sama dengan `Pointsnet`. dengan point pengguna dapat melakukan transaksi pembayaran ke semua layanan yang bekerjasama dengan pointsnet.
 
-* Dengan menggunakan *GraphQL API* Pointsnet kedalam aplikasi yang anda bangun.
-* Dengan menggunakan layanan aplikasi Pointsnet yang sudah di sediakan oleh  <a href="https://authscure.com.my/">AuthScure</a>. 
+Pointsnet menawarkan dua pilihan dalam menghubungkan ke aplikasi anda, yaitu
 
-## Syarat menggunakan Pointsnet
-
-### Mendaftarkan Aplikasi Anda
-
-Untuk menggunakan *GraphQL API* dari Pointsnet anda harus memiliki kerja sama dengan Pointsnet untuk mendapatkan ```token``` dan ```secret key``` agar dapat mengakses sumber data dari *endpoint* yang diberikan. Untuk dapat menggunakan Pointsnet GraphQL API maupun Aplikasi Pointsnet silahkan hubungi *Call Center* pada halaman [AuthScure](https://authscure.com.my/) 
-
-### Membuat Request
-
-Pada *GraphQL API* Pointsnet kami menggunakan metode *request* [HTTP(s)](#http-s-request) untuk melakukan komunikasi data.
-
-## Memulai menggunakan Pointsnet *GraphQL API*
-
-> Contoh penggunaan query tanpa argument
-
-```scheme
-{
-  hero {
-    name
-  }
-}
-```
-
-```json
-{
-  "data": {
-    "hero": {
-      "name": "R2-D2"
-    }
-  }
-}
-```
-
-> Contoh penggunaan query dengan menggunakan argument
-
-```scheme
-{
-  human(id: "1234") {
-    name
-    height
-  }
-}
-```
-
-```json
-{
-  "data": {
-    "human": {
-      "name": "Luke Skywalker",
-      "height": 1.72
-    }
-  }
-}
-```
-
-> Contoh penggunaan mutation
-
-```scheme
-  deleteHuman(id: 1234) {
-    status
-}
-```
-
-```json
-{
-  "data": {
-    "deleteHuman": {
-      "id": 1234,
-      "alert": "Luke Skywalker successfully deleted"
-    }
-  }
-}
-```
-
-### Diagram penggunaan Pointsnet *GraphQL API*
-
-![gambar](pointsnetapi.png)
+ - Mengembangkan sendiri di sisi aplikasi anda menggunakan API yang di sediakan. [dokumentasi](#menggunakan-api)
+ - Menggunakan metode redirect ke Aplikasi Pointsnet yang sudah di sediakan oleh [AuthScure](https://authscure.com.my). [dokumentasi](#menggunakan-aplikasi)
 
 ### Memulai menggunakan *GraphQL API*
 
-Jika anda ingin mulai menggunakan Pointsnet kedalam aplikasi anda sendiri langkah yang harus anda pahami adalah mengenai penggunaan *GraphQL API*. Pada *GraphQL API* hanya terdapat satu *endpoint* dan terdapat dua fungsi *query* yaitu **query** dan **mutation**. 
-
-### Query
-
-
-Pada *GraphQL API query* digunakan untuk mendapatkan data dari query yang di bentuk.
-
-### Mutation
-
-Pada *GraphQL API mutation* digunkan untuk melakukan *posting data*.  
-
+Jika anda ingin mulai menggunakan Pointsnet kedalam aplikasi anda langkah yang harus anda pahami adalah mengenai penggunaan *GraphQL API*. Pada *GraphQL API* hanya terdapat satu *endpoint* dan terdapat dua fungsi *query* yaitu **query** dan **mutation**.
 
 <aside class="success">
-  Contoh dari penggunaan <i>GraphQL API query dan mutation</i> dapat anda lihat pada menu shell untuk cara penggunaan dan menu json untuk hasil. Untuk informasi dokumentasi mengenai <i>GraphQL API</i> dapat di akses pada <a href="https://graphql.org" target="_blank">https://graphql.org</a>
+  Untuk informasi dokumentasi mengenai <i>GraphQL API</i> dapat di akses pada <a href="https://graphql.org" target="_blank">https://graphql.org</a>
 </aside>
+
+## Persyaratan
+ 
+ Wajib memiliki `token` dan `sekret key`
+
+ Untuk mendapatkan `token` dan `sekret key` silahkan hubungi [AuthScure](https://authscure.com.my)
+
+## Menggunakan API
+
+API ini disediakan oleh Poinstnet untuk di kembangkan disisi Aplikasi anda. Pelajari bagaimana melakukan permintaan data ke server Pointsnet [disini](#http-s-request)
+
+### Alur
+
+![gambar](pointsnetapi.png)
+
+
 
 ### Langkah - Langkah untuk menggunakan Pointsnet *GraphQL API*
 
@@ -120,7 +51,7 @@ Pada *GraphQL API mutation* digunkan untuk melakukan *posting data*.
 8. Setelah proses pembayaran berhasil langkah selanjutnya adalah menampilkan rincian transaksi dengan menggunakan argumen yang ada pada langkah [berikut](#).
 
 
-## Menggunakan Pointsnet dengan aplikasi yang di sediakan AuthScure
+## Menggunakan Aplikasi
 
 ### Diagram penggunaan Aplikasi Pointsnet 
 

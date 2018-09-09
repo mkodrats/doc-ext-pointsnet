@@ -1,7 +1,5 @@
 # HTTP(s) Request
 
-Pointsnet merupakan sebuah layanan SaaS yang berfungsi sebagai payment gateway.
-
 Proses komunikasi data pada server Pointsnet dapat dilakukan melalui HTTP(s) Request. Menggunakan syarat dan ketentuan sebagai berikut :
 
 ## API Base URL
