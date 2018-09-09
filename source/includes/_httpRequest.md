@@ -1,46 +1,61 @@
 # HTTP(s) Request
-Proses komunikasi data pada server Pointsnet dapat dilakukan melalui HTTP(s) Request. Menggunakan syarat dan ketentuan berikut :
+
+Pointsnet merupakan sebuah layanan SaaS yang berfungsi sebagai payment gateway.
+
+Proses komunikasi data pada server Pointsnet dapat dilakukan melalui HTTP(s) Request. Menggunakan syarat dan ketentuan sebagai berikut :
 
 ## API Base URL
+
 * Endpoint `https://api.pointsnet.co.uk/pointslink`
 
 ## HTTP(s) Headers
 
 ### Authorization
+
 Pada *endpoint* (`/pointslink`) membutuhkan `Authorization` header dengan syarat dan ketentuan berikut :  
 
 ### Header
 
-                   |                |                                                                                             |
-    -------------- | -------------- | --------------------------------------------------------------------------------------------|
-    Authorization: | Ganesha        | Zm9vOjhEMEM4QjdCRURFQ0NDRTM3NTAyMUM4RTAxNjQwMzkzMjZFRkJCRjcxNkY0ODkyMTM1REVENUVGQzlDMjk5OTk=|
-    1              | 2              | 3                                                                                           |
+                |         |             |
+----------------|---------|-------------|
+ Authorization: | Ganesha | Zm9vOjhEMEM4QjdCRURFQ0NDRTM3NTAyMUM4RTAxNjQwMzkzMjZFRkJCRjcxNkY0ODkyMTM1REVENUVGQzlDMjk5OTk= |
+ 1 | 2 | 3 |
     
 1. Nama header
 2. Nama metode otentikasi
-3. Base-64 dikodekan dari `:` nilai terpisah
+3. Nilai encoding Base64 dari:
 
-      |                                                                |
-    --|----------------------------------------------------------------
-    foo:|8D0C8B7BEDECCCE375021C8E0164039326EFBBF716F4892135DED5EFC9C29999
-    a|b
+                |
+----------------|
+token:signature |
 
-   - `a`: *client token key*
-   - `b`: *generated signature*
+### Misal
 
-### Signature
-Nilai dihitung dari HMAC SHA-256 dengan *secret key* dan *request body*.
-*Secret key*  digabungkan dengan *client token key*. *Client token key* bisa anda dapatkan setelah mendaftar di Pointsnet.
+ - token : `foo`
+ - signature : `8D0C8B7BEDECCCE375021C8E0164039326EFBBF716F4892135DED5EFC9C29999`
 
-### Contoh
-*Secret key*: `foo`
+Maka `foo:8D0C8B7BEDECCCE375021C8E0164039326EFBBF716F4892135DED5EFC9C29999` hasilnya adalah `Zm9vOjhEMEM4QjdCRURFQ0NDRTM3NTAyMUM4RTAxNjQwMzkzMjZFRkJCRjcxNkY0ODkyMTM1REVENUVGQzlDMjk5OTk=`
 
-*Request body*: `{"query": "query {transaction_detail(transaction_id: \"f64f2940-fae4-11e7-8c5f-ef356f279131\") {transaction {order_id, total_amount}, customer {first_name}} }"}`
+### Rincian pembuatan *signature*
 
-*Generated* HMAC SHA-256: 
-`8D0C8B7BEDECCCE375021C8E0164039326EFBBF716F4892135DED5EFC9C29999`
+HMAC SHA-256 didapat dari : 
 
-Anda dapat mencoba `HMAC Generator Online` [disini](https://www.freeformatter.com/hmac-generator.html)
+                        |
+------------------------|
+screet key+request body |
+
+### Misal
+
+ - screet key : `bar`
+ - request body : `{"query": "query {transaction_detail(transaction_id: \"f64f2940-fae4-11e7-8c5f-ef356f279131\") {transaction {order_id, total_amount}, customer {first_name}} }"}`
+
+Maka `bar{"query": "query {transaction_detail(transaction_id: \"f64f2940-fae4-11e7-8c5f-ef356f279131\") {transaction {order_id, total_amount}, customer {first_name}} }"}` hasilnya adalah `8D0C8B7BEDECCCE375021C8E0164039326EFBBF716F4892135DED5EFC9C29999`
+
+Anda dapat mencoba `HMAC Generator Online` <a href="https://www.freeformatter.com/hmac-generator.html" target="_blank"> disini </a>
+
+## Contoh
+
+Untuk melihat contoh *request* pada [javascript](?javascript#contoh), [shell](?shell#contoh)
 
    ```shell
    curl \  
