@@ -53,6 +53,17 @@ API ini disediakan oleh Poinstnet untuk di kembangkan disisi Aplikasi anda. Pela
 
 ## Menggunakan Aplikasi
 
-### Diagram penggunaan Aplikasi Pointsnet 
+### Alur
 
 ![gambar](apppointsnet.png)
+
+1. ```Frontend aplikasi klien``` melakukan *request* pada backend aplikasi klien untuk melakukan pembayaran dengan menggunakan Pointsnet.
+2. ```Backend aplikasi klien``` melakukan *request create* ID transaksi pada backend Pointsnet dengan menggunakan query [Mendapatkan ID Transaksi](#mendapatkan-id-transaksi).
+3. ```Backend aplikasi Pointsnet```  memberikan *response* berupa ID Transaksi pada backend aplikasi klien.
+4. ```Backend aplikasi klien``` memberikan *response* URL aplikasi Pointsnet
+5. ```Fronted apikasi klien``` mengalihkan ke aplikasi Pointsnet.
+6. ```Aplikasi Pointsnet``` melakukan proses transaksi.
+7. ```Aplikasi Pointsnet``` mengalihkan ke *backend* aplikasi klien.
+8. ```Backend aplikasi klien``` melakukan cek transaksi status kepada Backend aplikasi Pointsnet.
+9. ```Backend Pointsnet``` memberikan status transaksi.
+10. ```Backend aplikasi klien``` memberikan respon status transaksi. 
